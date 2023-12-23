@@ -26,7 +26,7 @@ services:
       - librum_db
 
   librum_db:
-    image: yobasystems/alpine-mariadb:latest
+    image: mariadb:latest
     command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
     hostname: mariadb
     container_name: librum_db
