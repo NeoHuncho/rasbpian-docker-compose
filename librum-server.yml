@@ -6,33 +6,34 @@ services:
     hostname: librum
     container_name: librum
     ports:
-      - 5000:5000
+      - 5133:5133
     networks:
       - librum
     volumes:
-      - librum:/var/lib/librum-server/librum_storage
+      - /srv/dev-disk-by-uuid-e5aad6d5-19c3-4432-b7e6-ce7d7ed33a09/apps/librum/server:/var/lib/librum-server/librum_storage
     environment:
-      - JWTValidIssuer=exampleIssuer
-      - JWTKey=exampleOfALongSecretToken
-      - SMTPEndpoint=smtp.example.com
-      - SMTPUsername=mailuser123
-      - SMTPPassword=smtpUserPassword123
-      - SMTPMailFrom=mailuser123@example.com
+      - JWTValidIssuer=librumapp
+      - JWTKey=${JWTKey}
+      - SMTPEndpoint=smtp.sendgrid.net
+      - SMTPUsername=apikey
+      - SMTPPassword=${SMTPPassword}
+      - SMTPMailFrom=william.guinaudie@gmail.com
       - DBConnectionString=Server=mariadb;port=3306;Database=librum;Uid=librum;Pwd=mariadb;
-      - AdminEmail=admin@example.com
-      - AdminPassword=strongPassword123
+      - AdminEmail=william.guinaudie@gmail.com
+      - AdminPassword=${AdminPassword}
     restart: unless-stopped
     depends_on:
       - librum_db
 
   librum_db:
-    image: mariadb:latest
+    image: yobasystems/alpine-mariadb:latest
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
     hostname: mariadb
     container_name: librum_db
     networks:
       - librum
     volumes:
-      - librum_db:/var/lib/mysql
+      - /srv/dev-disk-by-uuid-e5aad6d5-19c3-4432-b7e6-ce7d7ed33a09/apps/librum/db:/var/lib/mysql
     environment:
       - MARIADB_USER=librum
       - MARIADB_PASSWORD=mariadb
