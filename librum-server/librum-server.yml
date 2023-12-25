@@ -6,7 +6,7 @@ services:
     hostname: librum
     container_name: librum
     ports:
-      - 5133:5133
+      - 5000:5000
     networks:
       - librum
     volumes:
