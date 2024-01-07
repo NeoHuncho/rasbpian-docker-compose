@@ -25,7 +25,7 @@ services:
     restart: unless-stopped
     depends_on:
       - librum_db:
-          condition: service_healthy            # Ensures the DB is up before the server.
+        - condition: service_healthy            # Ensures the DB is up before the server.
   
   librum_db:
     image: yobasystems/alpine-mariadb:latest
