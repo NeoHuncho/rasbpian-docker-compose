@@ -2,7 +2,7 @@
 version: "3.8"
 services:
   librum:
-    image: librum
+    image: ghcr.io/librum-reader/librum-server:latest
     hostname: librum
     container_name: librum
     ports:
@@ -10,7 +10,7 @@ services:
     networks:
       - librum
     volumes:
-      - /srv/dev-disk-by-uuid-e5aad6d5-19c3-4432-b7e6-ce7d7ed33a09/apps/librum/server:/var/lib/librum-server/librum_storage
+      - /srv/dev-disk-by-uuid-e5aad6d5-19c3-4432-b7e6-ce7d7ed33a09/apps/librum/storage:/var/lib/librum-server/librum_storage
     environment:
       - JWTValidIssuer=librumapp
       - JWTKey=${JWTKey}
@@ -21,13 +21,14 @@ services:
       - DBConnectionString=Server=mariadb;port=3306;Database=librum;Uid=librum;Pwd=mariadb;
       - AdminEmail=william.guinaudie@gmail.com
       - AdminPassword=${AdminPassword}
+      - OpenAIToken=${OpenAIToken}
     restart: unless-stopped
     depends_on:
-      - librum_db
+      librum_db:
+        condition: service_healthy            
 
   librum_db:
     image: yobasystems/alpine-mariadb:latest
-    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
     hostname: mariadb
     container_name: librum_db
     networks:
@@ -40,6 +41,12 @@ services:
       - MARIADB_DATABASE=librum
       - MARIADB_ROOT_PASSWORD=mariadb
     restart: unless-stopped
+    healthcheck:                              # Ensures the DB is up before the server.
+      test: ["CMD", "mariadb-admin", "ping", "-u", "librum", "-p'mariadb'", "-h", "localhost"]
+      interval: 20s
+      timeout: 40s
+      retries: 3
+      start_period: 30s
 
 networks:
   librum:
