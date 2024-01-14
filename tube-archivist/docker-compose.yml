@@ -54,7 +54,6 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - /mainDrive/cache/tube-archivist-es:/usr/share/elasticsearch/data    # check for permission error when using bind mount, see readme
-      - /usr/share/elasticsearch/data/snapshot:/usr/share/elasticsearch/data/snapshot
+      - /usr/share/elasticsearch/data:/usr/share/elasticsearch/data    # check for permission error when using bind mount, see readme
     expose:
       - "9200"
