@@ -2,7 +2,7 @@
 version: '3.8'
 services:
   ffmpeg:
-    image: jrottenberg/ffmpeg
+    image: jrottenberg/ffmpeg:4.1-alpine38-arm32v6
     volumes:
       - /mainDrive/media/youtube:/downloads
     command: >
