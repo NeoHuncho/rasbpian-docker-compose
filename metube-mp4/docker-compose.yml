@@ -1,0 +1,14 @@
+version: "3"
+services:
+  metube:
+    image: ghcr.io/alexta69/metube
+    container_name: metube
+    restart: unless-stopped
+    ports:
+      - "8082:8082"
+    volumes:
+      - /mainDrive/media/youtube:/downloads
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
