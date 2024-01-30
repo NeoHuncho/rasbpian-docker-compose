@@ -7,16 +7,16 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: supersecret
       MYSQL_USER: vikunja
-      MYSQL_PASSWORD: secret
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_DATABASE: vikunja
     volumes:
-      - ./db:/var/lib/mysql
+      - /mainDrive/apps/vikunja/db:/var/lib/mysql
     restart: unless-stopped
   api:
     image: vikunja/api
     environment:
       VIKUNJA_DATABASE_HOST: db
-      VIKUNJA_DATABASE_PASSWORD: secret
+      VIKUNJA_DATABASE_PASSWORD: ${MYSQL_PASSWORD}
       VIKUNJA_DATABASE_TYPE: mysql
       VIKUNJA_DATABASE_USER: vikunja
       VIKUNJA_DATABASE_DATABASE: vikunja
@@ -25,7 +25,7 @@ services:
     ports:
       - 3456:3456
     volumes:
-      - ./files:/app/vikunja/files
+      - ./mainDrive/apps/vikunja/app:/app/vikunja/files
     depends_on:
       - db
     restart: unless-stopped
