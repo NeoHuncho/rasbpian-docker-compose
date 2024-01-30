@@ -23,7 +23,7 @@ services:
       VIKUNJA_SERVICE_JWTSECRET: ${VIKUNJA_SERVICE_JWTSECRET}
       VIKUNJA_SERVICE_FRONTENDURL: https://todo.williamguinaudie.com/
     ports:
-      - 3456:3456
+      - 3356:3356
     volumes:
       - ./mainDrive/apps/vikunja/app:/app/vikunja/files
     depends_on:
@@ -32,7 +32,7 @@ services:
   frontend:
     image: vikunja/frontend
     ports:
-      - 80:80
+      - 4394:4394
     environment:
       VIKUNJA_API_URL: http://192.168.0.214:3456/api/v1
     restart: unless-stopped
