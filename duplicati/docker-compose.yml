@@ -13,7 +13,7 @@ services:
       - /backupDrive1:/BackupStorage1 #Backup Storage
       - /backupDrive2:/BackupStorage2 #Backup Storage
       - /mainDrive:/mainBackup #What to Backup
-      - /home:/homeBackup #Home directory backup
+      - /home:/homeBackup #What to Backup
     ports:
       - 8200:8200
     restart: unless-stopped
