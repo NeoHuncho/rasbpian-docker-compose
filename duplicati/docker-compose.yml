@@ -12,8 +12,8 @@ services:
       - /mainDrive/apps/duplicati:/config #Config Files
       - /backupDrive1:/BackupStorage1 #Backup Storage
       - /backupDrive2:/BackupStorage2 #Backup Storage
-      - /mainDrive:/mainBackup #What to Backup
-      - /home:/homeBackup #What to Backup
+      - /mainDrive:/mainDrive #What to Backup
+      - /home:/home #What to Backup
     ports:
       - 8200:8200
     restart: unless-stopped
