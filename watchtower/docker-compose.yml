@@ -1,0 +1,13 @@
+version: '2.1'
+services:
+    watchtower:
+        image: containrrr/watchtower
+        container_name: watchtower
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+        environment:
+            - TZ=Europe/Paris
+            - WATCHTOWER_MONITOR_ONLY=false
+            - WATCHTOWER_SCHEDULE=0 0 2 ? * THU
+            - WATCHTOWER_CLEANUP=true
+        restart: unless-stopped
