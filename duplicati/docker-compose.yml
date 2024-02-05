@@ -1,0 +1,19 @@
+---
+version: "2.1"
+services:
+  duplicati:
+    image: linuxserver/duplicati
+    container_name: duplicati
+    environment:
+      - PUID=501
+      - PGID=20
+      - TZ=Europe/Paris
+    volumes:
+      - /mainDrive/apps/duplicati:/config #Config Files
+      - /backupDrive1:/BackupStorage1 #Backup Storage
+      - /backupDrive2:/BackupStorage2 #Backup Storage
+      - /mainDrive:/mainBackup #What to Backup
+      - /home:/homeBackup #Home directory backup
+    ports:
+      - 8200:8200
+    restart: unless-stopped
