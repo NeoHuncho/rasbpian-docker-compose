@@ -11,6 +11,7 @@ services:
     command: -config.file=/etc/loki/local-config.yaml
     networks:
       - loki
+    restart: unless-stopped
 
   promtail:
     image: grafana/promtail:2.9.2
@@ -19,6 +20,7 @@ services:
     command: -config.file=/etc/promtail/config.yml
     networks:
       - loki
+    restart: unless-stopped
 
   grafana:
     environment:
@@ -49,3 +51,4 @@ services:
       - "4565:3000"
     networks:
       - loki
+    restart: unless-stopped
