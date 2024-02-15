@@ -14,7 +14,7 @@ services:
     ports:
       - 3756:3456
     volumes:
-      - ./mainDrive/apps/vikunja/app:/app/vikunja/files
+      - /mainDrive/apps/vikunja/app:/app/vikunja/files
     depends_on:
       - db
     restart: unless-stopped
