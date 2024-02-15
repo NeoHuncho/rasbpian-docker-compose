@@ -1,6 +1,23 @@
 version: '3'
 
 services:
+  vikunja:
+    image: vikunja/vikunja
+    environment:
+      VIKUNJA_SERVICE_PUBLICURL: ${VIKUNJA_SERVICE_PUBLICURL}
+      VIKUNJA_DATABASE_HOST: db
+      VIKUNJA_DATABASE_PASSWORD: ${MYSQL_PASSWORD}
+      VIKUNJA_DATABASE_TYPE: mysql
+      VIKUNJA_DATABASE_USER: vikunja
+      VIKUNJA_DATABASE_DATABASE: vikunja
+      VIKUNJA_SERVICE_JWTSECRET: ${VIKUNJA_SERVICE_JWTSECRET}
+    ports:
+      - 3756:3456
+    volumes:
+      - ./mainDrive/apps/vikunja/app:/app/vikunja/files
+    depends_on:
+      - db
+    restart: unless-stopped
   db:
     image: yobasystems/alpine-mariadb:latest
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
@@ -11,28 +28,4 @@ services:
       MYSQL_DATABASE: vikunja
     volumes:
       - /mainDrive/apps/vikunja/db:/var/lib/mysql
-    restart: unless-stopped
-  api:
-    image: vikunja/api
-    environment:
-      VIKUNJA_DATABASE_HOST: db
-      VIKUNJA_DATABASE_PASSWORD: ${MYSQL_PASSWORD}
-      VIKUNJA_DATABASE_TYPE: mysql
-      VIKUNJA_DATABASE_USER: vikunja
-      VIKUNJA_DATABASE_DATABASE: vikunja
-      VIKUNJA_SERVICE_JWTSECRET: ${VIKUNJA_SERVICE_JWTSECRET}
-      VIKUNJA_SERVICE_FRONTENDURL: https://todo.williamguinaudie.com/
-    ports:
-      - 3756:3456
-    volumes:
-      - ./mainDrive/apps/vikunja/app:/app/vikunja/files
-    depends_on:
-      - db
-    restart: unless-stopped
-  frontend:
-    image: vikunja/frontend
-    ports:
-      - 4593:80
-    environment:
-      VIKUNJA_API_URL: https://todoapi.williamguinaudie.com/api/v1
     restart: unless-stopped
