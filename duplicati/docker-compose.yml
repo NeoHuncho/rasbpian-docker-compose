@@ -5,8 +5,8 @@ services:
     image: linuxserver/duplicati
     container_name: duplicati
     environment:
-      - PUID=998
-      - PGID=100
+      - PUID=1000
+      - PGID=1000
       - TZ=Europe/Paris
     volumes:
       - /mainDrive/apps/duplicati:/config #Config Files
