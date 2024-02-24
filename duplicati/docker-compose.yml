@@ -11,6 +11,7 @@ services:
     volumes:
       - /mainDrive/apps/duplicati:/config #Config Files
       - /srv/dev-disk-by-uuid-1c89d2e1-dec1-4e88-bdad-795fa3db2cbf/backup:/BackupStorage1 #Backup Storage
+      - /srv/dev-disk-by-uuid-1c89d2e1-dec1-4e88-bdad-795fa3db2cbf:/backupDrive1 #Backup Drive
       - /mainDrive:/mainDrive #What to Backup
     ports:
       - 8200:8200
