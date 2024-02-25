@@ -8,8 +8,8 @@ services:
     ports:
       - "8029:80"
     volumes:
-      - mainDrive/apps/baikal/config:/var/www/baikal/config
-      - mainDrive/apps/baikal/data:/var/www/baikal/Specific
+      - /mainDrive/apps/baikal/config:/var/www/baikal/config
+      - /mainDrive/apps/baikal/data:/var/www/baikal/Specific
 
 volumes:
   config:
