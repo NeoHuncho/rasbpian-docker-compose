@@ -18,7 +18,7 @@ services:
         restart: unless-stopped
         image: postgres:13.1-alpine
         ports:
-            - "5432:5432"
+            - "5412:5432"
         volumes:
             - /mainDrive/apps/joplin/db:/var/lib/postgresql/data
         environment:
