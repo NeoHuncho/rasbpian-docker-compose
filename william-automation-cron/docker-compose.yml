@@ -10,3 +10,4 @@ services:
       - MISTRAL_API_KEY=${MISTRAL_API_KEY}
       - NOTION_API_KEY=${NOTION_API_KEY}
       - HOST_LOKI=${HOST_LOKI}
+      - NODE_ENV=production
