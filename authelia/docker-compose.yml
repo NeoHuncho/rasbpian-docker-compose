@@ -1,0 +1,12 @@
+version: '3.3'
+    
+services:
+  authelia:
+    image: authelia/authelia
+    container_name: authelia
+    volumes:
+      - /mainDrive/apps/authelia:/config 
+    ports:
+      - 9091:9091
+    environment:
+      - TZ=America/Denver
