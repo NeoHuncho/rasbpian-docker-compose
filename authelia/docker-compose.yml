@@ -1,5 +1,4 @@
 version: '3.3'
-    
 services:
   authelia:
     image: authelia/authelia
@@ -9,4 +8,4 @@ services:
     ports:
       - 9091:9091
     environment:
-      - TZ=America/Denver
+      - TZ=Europe/Paris
