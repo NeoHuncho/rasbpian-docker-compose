@@ -13,8 +13,9 @@ services:
       - SERVERURL=wireguard.coprin.ovh #optional
       - SERVERPORT=51820 #optional
       - PEERS=1 #optional
-      - PEERDNS=10.13.13.0 #optional
+      - PEERDNS=auto #optional
       - INTERNAL_SUBNET=10.13.13.0 #optional
+      - ALLOWEDIPS=0.0.0.0/0 #optional
     volumes:
       - /mainDrive/apps/wireguard/config:/config
       - /lib/modules:/lib/modules
