@@ -10,16 +10,14 @@ services:
       - PUID=0
       - PGID=0
       - TZ=Europe/Paris
-      - SERVERURL=auto #optional
+      - SERVERURL=wireguard.coprin.ovh #optional
       - SERVERPORT=51820 #optional
       - PEERS=1 #optional
       - PEERDNS=1.1.1.1 #optional
       - INTERNAL_SUBNET=10.13.13.0 #optional
     volumes:
       - /mainDrive/apps/wireguard/config:/config
-      - /mainDrive/apps/wireguard/modules:/lib/modules
+      - /lib/modules:/lib/modules
     ports:
       - 51820:51820/udp
-    sysctls:
-      - net.ipv4.conf.all.src_valid_mark=1
     restart: unless-stopped
