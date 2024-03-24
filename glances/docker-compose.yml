@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  whoami:
+    image: emilevauge/whoami
+
+  monitoring:
+    image: nicolargo/glances:latest-alpine
+    restart: always
+    pid: host
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - "GLANCES_OPT=-w"
