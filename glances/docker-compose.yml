@@ -2,7 +2,7 @@ version: '3'
 
 services:
   whoami:
-    image: emilevauge/whoami
+    image: traefik/whoami
 
   monitoring:
     image: nicolargo/glances:latest-alpine
