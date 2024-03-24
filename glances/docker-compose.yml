@@ -7,7 +7,6 @@ services:
   monitoring:
     image: nicolargo/glances
     restart: always
-    pid: host
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
