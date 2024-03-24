@@ -5,7 +5,7 @@ services:
     image: traefik/whoami
 
   monitoring:
-    image: nicolargo/glances:latest-alpine
+    image: nicolargo/glances
     restart: always
     pid: host
     volumes:
