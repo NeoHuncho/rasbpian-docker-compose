@@ -4,8 +4,7 @@ services:
     cap_add:
       - NET_ADMIN
     volumes:
-      - /mainDrive/downloadingTorrents:/data
-      - /mainDrive/tempTorrents:/temp
+      - /mainDrive/torrents:/data
       - /mainDrive/media:/media
       - /mainDrive/apps/transmission:/config
     environment:
