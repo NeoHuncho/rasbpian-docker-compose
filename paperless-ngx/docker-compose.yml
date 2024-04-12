@@ -40,6 +40,7 @@ services:
       PAPERLESS_ADMIN_PASSWORD: admin
       PAPERLESS_URL: http://paperless.coprin.ovh
       PAPERLESS_ALLOWED_HOSTS: paperless.coprin.ovh
+      PAPERLESS_CSRF_TRUSTED_ORIGINS: http://paperless.coprin.ovh
 
 volumes:
   data:
