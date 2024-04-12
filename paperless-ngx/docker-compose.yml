@@ -38,9 +38,9 @@ services:
       PAPERLESS_OCR_LANGUAGE: fra
       PAPERLESS_ADMIN_USER: admin
       PAPERLESS_ADMIN_PASSWORD: admin
-      PAPERLESS_URL: http://paperless.coprin.ovh
+      PAPERLESS_URL: https://paperless.coprin.ovh
       PAPERLESS_ALLOWED_HOSTS: paperless.coprin.ovh
-      PAPERLESS_CSRF_TRUSTED_ORIGINS: http://paperless.coprin.ovh
+      PAPERLESS_CSRF_TRUSTED_ORIGINS: https://paperless.coprin.ovh
 
 volumes:
   data:
