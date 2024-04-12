@@ -14,7 +14,7 @@ services:
     environment:
       POSTGRES_DB: paperless
       POSTGRES_USER: paperless
-      POSTGRES_PASSWORD: paperless
+      POSTGRES_PASSWORD: ${PAPERLESS_DBPASS}
 
   webserver:
     image: ghcr.io/paperless-ngx/paperless-ngx:latest
@@ -37,13 +37,8 @@ services:
       PAPERLESS_TIME_ZONE: Europe/Paris
       PAPERLESS_OCR_LANGUAGE: fra
       PAPERLESS_ADMIN_USER: admin
-      PAPERLESS_ADMIN_PASSWORD: admin
-      PAPERLESS_URL: https://paperless.coprin.ovh
-      PAPERLESS_ALLOWED_HOSTS: paperless.coprin.ovh
-      PAPERLESS_CSRF_TRUSTED_ORIGINS: https://paperless.coprin.ovh
-
-volumes:
-  data:
-  media:
-  pgdata:
-  redisdata:
+      PAPERLESS_ADMIN_PASSWORD: ${PAPERLESS_ADMIN_PASSWORD}
+      PAPERLESS_DBPASS: ${PAPERLESS_DBPASS}
+      PAPERLESS_URL: ${PAPERLESS_URL}
+      PAPERLESS_ALLOWED_HOSTS: ${PAPERLESS_URL}
+      PAPERLESS_CSRF_TRUSTED_ORIGINS: ${PAPERLESS_URL}
