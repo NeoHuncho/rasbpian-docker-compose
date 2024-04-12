@@ -23,7 +23,7 @@ services:
       - db
       - broker
     ports:
-      - "8010:8000"
+      - "8011:8000"
     volumes:
       - /mainDrive/apps/paperless-ngx/data:/usr/src/paperless/data
       - /mainDrive/apps/paperless-ngx/media:/usr/src/paperless/media
