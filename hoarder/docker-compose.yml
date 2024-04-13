@@ -4,7 +4,7 @@ services:
     image: ghcr.io/mohamedbassem/hoarder-web:${HOARDER_VERSION:-release}
     restart: unless-stopped
     volumes:
-      - mainDrive/apps/hoarder/data:/data
+      - /mainDrive/apps/hoarder/data:/data
     ports:
       - 3200:3000
     env_file:
@@ -17,7 +17,7 @@ services:
     image: redis:7.2-alpine
     restart: unless-stopped
     volumes:
-      - mainDrive/apps/hoarder/redis:/data
+      - /mainDrive/apps/hoarder/redis:/data
   chrome:
     image: gcr.io/zenika-hub/alpine-chrome:123
     restart: unless-stopped
@@ -32,12 +32,12 @@ services:
     env_file:
       - .env
     volumes:
-      - mainDrive/apps/hoarder/meilisearch:/meili_data
+      - /mainDrive/apps/hoarder/meilisearch:/meili_data
   workers:
     image: ghcr.io/mohamedbassem/hoarder-workers:${HOARDER_VERSION:-release}
     restart: unless-stopped
     volumes:
-      - mainDrive/apps/hoarder/worker:/data
+      - /mainDrive/apps/hoarder/worker:/data
     env_file:
       - .env
     environment:
