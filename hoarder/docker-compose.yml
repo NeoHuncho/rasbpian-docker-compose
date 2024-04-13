@@ -8,7 +8,7 @@ services:
     ports:
       - 3200:3000
     env_file:
-      - stack.env
+      - .stack.env
     environment:
       REDIS_HOST: redis
       MEILI_ADDR: http://meilisearch:7700
@@ -32,12 +32,12 @@ services:
     volumes:
       - /mainDrive/apps/hoarder/meilisearch:/meili_data
     env_file:
-      - stack.env
+      - .stack.env
   workers:
     image: ghcr.io/mohamedbassem/hoarder-workers:latest
     restart: unless-stopped
     env_file:
-      - stack.env
+      - .stack.env
     volumes:
       - /mainDrive/apps/hoarder/worker:/data
     environment:
