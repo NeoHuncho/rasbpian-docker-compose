@@ -7,6 +7,8 @@ services:
       - /mainDrive/apps/hoarder/data:/data
     ports:
       - 3200:3000
+    env_file:
+      - stack.env
     environment:
       REDIS_HOST: redis
       MEILI_ADDR: http://meilisearch:7700
