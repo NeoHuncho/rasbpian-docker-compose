@@ -7,12 +7,11 @@ services:
       - /mainDrive/apps/hoarder/data:/data
     ports:
       - 3200:3000
-    env_file:
-      - stack.env
     environment:
       REDIS_HOST: redis
       MEILI_ADDR: http://meilisearch:7700
       DATA_DIR: /data
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
   redis:
     image: redis:7.2-alpine
     restart: unless-stopped
@@ -31,13 +30,9 @@ services:
     restart: unless-stopped
     volumes:
       - /mainDrive/apps/hoarder/meilisearch:/meili_data
-    env_file:
-      - stack.env
   workers:
     image: ghcr.io/mohamedbassem/hoarder-workers:latest
     restart: unless-stopped
-    env_file:
-      - stack.env
     volumes:
       - /mainDrive/apps/hoarder/worker:/data
     environment:
@@ -46,6 +41,7 @@ services:
       BROWSER_WEB_URL: http://chrome:9222
       DATA_DIR: /data
       OPENAI_API_KEY: ${OPENAI_API_KEY}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
     depends_on:
       web:
         condition: service_started
