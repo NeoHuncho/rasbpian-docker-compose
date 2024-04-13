@@ -12,6 +12,8 @@ services:
       MEILI_ADDR: http://meilisearch:7700
       DATA_DIR: /data
       NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+      MEILI_MASTER_KEY: ${MEILI_MASTER_KEY} 
+      NEXTAUTH_URL: ${NEXTAUTH_URL}
   redis:
     image: redis:7.2-alpine
     restart: unless-stopped
@@ -30,6 +32,8 @@ services:
     restart: unless-stopped
     volumes:
       - /mainDrive/apps/hoarder/meilisearch:/meili_data
+    environment:
+      MEILI_MASTER_KEY: ${MEILI_MASTER_KEY}
   workers:
     image: ghcr.io/mohamedbassem/hoarder-workers:latest
     restart: unless-stopped
@@ -42,6 +46,8 @@ services:
       DATA_DIR: /data
       OPENAI_API_KEY: ${OPENAI_API_KEY}
       NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+      MEILI_MASTER_KEY: ${MEILI_MASTER_KEY} 
+      NEXTAUTH_URL: ${NEXTAUTH_URL}
     depends_on:
       web:
         condition: service_started
