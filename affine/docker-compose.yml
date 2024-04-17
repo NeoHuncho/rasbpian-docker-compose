@@ -31,6 +31,12 @@ services:
       - AFFINE_ADMIN_EMAIL=${AFFINE_ADMIN_EMAIL}
       - AFFINE_ADMIN_PASSWORD=${AFFINE_ADMIN_PASSWORD}
       - AFFINE_SERVER_HOST=${AFFINE_SERVER_HOST}
+      - MAILER_HOST=smtp.sendgrid.net
+      - MAILER_PASSWORD=${MAILER_PASSWORD}
+      - MAILER_PORT=587
+      - MAILER_SECURE=false
+      - MAILER_SENDER=${MAILER_SENDER}
+      - MAILER_USER=apikey
   redis:
     image: redis
     container_name: affine_redis
