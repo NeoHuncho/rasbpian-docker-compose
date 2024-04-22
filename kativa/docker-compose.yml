@@ -3,7 +3,7 @@ services:
     kavita:
         image: jvmilazz0/kavita:latest
         volumes:
-            - /mainDrive/media/books:/media
+            - /mainDrive/media/books:/books
             - /mainDrive/apps/kativa:/kavita/config
         ports:
             - "5000:5000"
