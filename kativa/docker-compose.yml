@@ -1,7 +1,7 @@
 version: '3.9'
 services:
     kavita:
-        image: jvmilazz0/kavita:latest
+        image: lscr.io/linuxserver/kavita:latest
         volumes:
             - /mainDrive/media/books:/books
             - /mainDrive/apps/kativa:/kavita/config
@@ -10,5 +10,5 @@ services:
         environment:
               - TZ=Europe/Paris
               - PUID=1000
-              - PGID=1000
+              - PGID=1000 
         restart: unless-stopped
