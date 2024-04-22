@@ -3,12 +3,12 @@ services:
     kavita:
         image: jvmilazz0/kavita:latest
         volumes:
-            - ./mainDrive/media/books:/books
-            - ./mainDrive/apps/kativa:/kavita/config
+            - /mainDrive/media/books:/media
+            - /mainDrive/apps/kativa:/kavita/config
         ports:
             - "5000:5000"
         environment:
               - TZ=Europe/Paris
-              - PUID=0
-              - PGID=0
+              - PUID=1000
+              - PGID=1000
         restart: unless-stopped
