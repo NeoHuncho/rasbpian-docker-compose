@@ -6,4 +6,4 @@ services:
     environment:
       - PLEX_SERVER=${PLEX_SERVER}
     ports:
-      - 3000:3843
+      - 3000:3000
