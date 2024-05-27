@@ -6,4 +6,4 @@ services:
     environment:
       - PLEX_SERVER=http://86.192.160.146:32400
     ports:
-      - 3000:3001
+      - 3000:3000
