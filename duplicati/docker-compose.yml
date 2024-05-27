@@ -1,5 +1,5 @@
 ---
-version: "2.1"
+version: "3.9"
 services:
   duplicati:
     image: linuxserver/duplicati
@@ -16,4 +16,5 @@ services:
     ports:
       - 8200:8200
     restart: unless-stopped
+    cpus: 0.9
     
