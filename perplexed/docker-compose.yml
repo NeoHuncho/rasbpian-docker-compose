@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  perplexed:
+    image: ipmake/perplexed
+    container_name: perplexed
+    environment:
+      - PLEX_SERVER=${PLEX_SERVER}
+    ports:
+      - 3000:3001
