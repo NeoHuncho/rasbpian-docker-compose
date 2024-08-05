@@ -1,46 +1,61 @@
 version: "3.2"
 services:
-
   outline:
     image: docker.getoutline.com/outlinewiki/outline:latest
+    container_name: outline-app
+    hostname: outline-app
     ports:
-      - "3005:3000"
+      - 3000:3000
     volumes:
-      - storage-data:/var/lib/outline/data
+      - ./storage-data:/var/lib/outline/data
     depends_on:
       - postgres
       - redis
-
+    environment:
+      PGSSLMODE: disable
+      SECRET_KEY: ${SECRET_KEY}
+      UTILS_SECRET: ${UTILS_SECRET}
+      DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@outline-postgres:5432/${POSTGRES_DB}
+      REDIS_URL: redis://outline-redis:6379
+      URL: ${URL}
+      PORT: ${PORT}
+      FILE_STORAGE: local
+      FILE_STORAGE_LOCAL_ROOT_DIR: /var/lib/outline/data
+      FILE_STORAGE_UPLOAD_MAX_SIZE: 26214400
+      SLACK_CLIENT_ID: ${SLACK_CLIENT_ID}
+      SLACK_CLIENT_SECRET: ${SLACK_CLIENT_SECRET}
+    restart: unless-stopped
   redis:
+    container_name: outline-redis
+    hostname: outline-redis
     image: redis
-    ports:
-      - "6343:6379"
     volumes:
       - ./redis.conf:/redis.conf
-    command: ["redis-server", "/redis.conf"]
+    command:
+      - redis-server
+      - /redis.conf
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test:
+        - CMD
+        - redis-cli
+        - ping
       interval: 10s
       timeout: 30s
       retries: 3
-
+    restart: unless-stopped
   postgres:
     image: postgres
-    ports:
-      - "5420:5432"
+    container_name: outline-postgres
+    hostname: outline-postgres
     volumes:
-      - database-data:/var/lib/postgresql/data
+      - ./database-data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD", "pg_isready", "-d", "outline", "-U", "user"]
+      test:
+        - CMD
+        - pg_isready
       interval: 30s
-      timeout: 20s
-      retries: 3
     environment:
-      POSTGRES_USER: 'user'
-      POSTGRES_PASSWORD: $
-      POSTGRES_DB: 'outline'
-
-volumes:
-  https-portal-data:
-  storage-data:
-  database-data:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    restart: unless-stopped
