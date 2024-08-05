@@ -3,7 +3,7 @@ services:
 
   outline:
     image: docker.getoutline.com/outlinewiki/outline:latest
-    env_file: ./stack.env
+    env_file: stack.env
     ports:
       - "3005:3000"
     volumes:
@@ -14,7 +14,7 @@ services:
 
   redis:
     image: redis
-    env_file: ./stack.env
+    env_file: stack.env
     ports:
       - "6343:6379"
     volumes:
@@ -28,7 +28,7 @@ services:
 
   postgres:
     image: postgres
-    env_file: ./stack.env
+    env_file: stack.env
     ports:
       - "5420:5432"
     volumes:
