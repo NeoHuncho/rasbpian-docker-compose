@@ -7,7 +7,7 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ./storage-data:/var/lib/outline/data
+      - /mainDrive/apps/outline/storage:/var/lib/outline/data
     depends_on:
       - postgres
       - redis
@@ -38,7 +38,7 @@ services:
     hostname: outline-redis
     image: redis
     volumes:
-      - ./redis.conf:/redis.conf
+      - /mainDrive/apps/outline/redis/redis.conf:/redis.conf
     command:
       - redis-server
       - /redis.conf
@@ -56,7 +56,7 @@ services:
     container_name: outline-postgres
     hostname: outline-postgres
     volumes:
-      - ./database-data:/var/lib/postgresql/data
+      - /mainDrive/apps/outline/db:/var/lib/postgresql/data
     healthcheck:
       test:
         - CMD
