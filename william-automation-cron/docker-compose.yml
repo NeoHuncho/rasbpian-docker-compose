@@ -13,4 +13,6 @@ services:
       - NOTION_API_KEY=${NOTION_API_KEY}
       - HOST_LOKI=${HOST_LOKI}
       - NODE_ENV=production
+      - VIKUNJA_API_KEY=${VIKUNJA_API_KEY}
+      - VIKUNJA_HOST=${VIKUNJA_HOST}
   
