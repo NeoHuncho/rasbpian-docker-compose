@@ -16,4 +16,3 @@ services:
     ports:
       - 8200:8200
     restart: unless-stopped
-    command: duplicati-server --rebuild-missing-dblock-files
