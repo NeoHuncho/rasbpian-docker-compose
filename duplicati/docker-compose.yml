@@ -10,8 +10,8 @@ services:
       - TZ=Europe/Paris
     volumes:
       - /mainDrive/apps/duplicati:/config #Config Files
-      - /srv/dev-disk-by-uuid-1c89d2e1-dec1-4e88-bdad-795fa3db2cbf/backup:/BackupStorage1 #Backup Storage
       - /srv/dev-disk-by-uuid-1c89d2e1-dec1-4e88-bdad-795fa3db2cbf:/backupDrive1 #Backup Drive
+      - /srv/dev-disk-by-uuid-23b2c520-4bf1-4abb-9e7e-3e6538ffeb3c:/backupDrive2 #Backup Drive 2 
       - /mainDrive:/mainDrive #What to Backup
     ports:
       - 8200:8200
