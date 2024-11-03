@@ -9,6 +9,9 @@ services:
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - ~/backupDrive2:/mnt/backupDrive2
+      - ~/backupDrive1:/mnt/backupDrive1
+      - ~/mainDrive:/mnt/mainDrive
     environment:
       - "GLANCES_OPT=-w"
     ports:
