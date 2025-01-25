@@ -18,8 +18,9 @@ services:
       # Do not edit the next line. If you want to change the media storage location on your system, edit the value of UPLOAD_LOCATION in the .env file
       - ${UPLOAD_LOCATION}:/usr/src/app/upload
       - /etc/localtime:/etc/localtime:ro
-    env_file:
-      - stack.env
+    environment:
+      UPLOAD_LOCATION: ${UPLOAD_LOCATION}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
       - '2283:2283'
     depends_on:
