@@ -27,6 +27,7 @@ LOG_FILE="$(pwd)/compression.log"
 printf "Compression started at %s\n" "$(date)" > "$LOG_FILE"
 
 # Process video function
+
 process_video() {
     local input_file="$1"
     local TEMP_FILE="${input_file%.*}_temp.mp4"
@@ -36,16 +37,18 @@ process_video() {
     
     printf "[%d/%d] Processing: %s\n" "$current" "$total" "$input_file"
     
-    # Store original timestamps
-    local atime=$(stat -f %a "$input_file")
-    local mtime=$(stat -f %m "$input_file")
-    local ctime=$(stat -f %c "$input_file")
-    
+    # Get original file size and timestamps
+    local original_size=$(stat -f %z "$input_file")
+
     if ! ffmpeg -i "$input_file" \
-        -map 0:v:0 -map 0:a:0 \
+        -map 0:v:0 -map 0:a:0? \
         -map_metadata 0 \
-        -c:v h264_videotoolbox -b:v 8M \
-        -vf "scale=-1:1080:flags=lanczos" \
+        -c:v h264_videotoolbox \
+        -b:v 5M \
+        -maxrate 6M \
+        -bufsize 6M \
+        -crf 18 \
+        -vf "scale='min(1920,iw)':'-2':flags=lanczos" \
         -c:a aac -b:a 128k \
         -threads 0 \
         -movflags +faststart \
@@ -56,28 +59,33 @@ process_video() {
         return 1
     fi
 
-    # Restore timestamps and move to final destination
+    # Get compressed size and calculate savings
+    local compressed_size=$(stat -f %z "$TEMP_FILE")
+    local saved_space=$((original_size - compressed_size))
+    local compression_ratio=$(echo "scale=2; $compressed_size * 100 / $original_size" | bc)
+
+    # Move and restore timestamps
     if mv "$TEMP_FILE" "$output_file"; then
-        touch -a -t $(date -r $atime "+%Y%m%d%H%M.%S") "$output_file"
-        touch -m -t $(date -r $mtime "+%Y%m%d%H%M.%S") "$output_file"
-        
-        # Remove original file only if conversion was successful
         rm "$input_file"
-        printf "[%d/%d] Compressed: %s -> %s\n" "$current" "$total" "$input_file" "$output_file"
+        printf "[%d/%d] Compressed: %s (%.2f%% of original, saved %.2f MB)\n" \
+            "$current" "$total" \
+            "$input_file" \
+            "$compression_ratio" \
+            "$(echo "scale=2; $saved_space / 1048576" | bc)"
         return 0
     else
-        printf "[%d/%d] Error moving temp file to destination: %s\n" "$current" "$total" "$output_file"
+        printf "[%d/%d] Error moving temp file: %s\n" "$current" "$total" "$output_file"
         rm -f "$TEMP_FILE"
         return 1
     fi
 }
 
-
 # Create array to store files (Mac compatible)
 files=()
 while IFS= read -r -d $'\0' file; do
     files+=("$file")
-done < <(find "$BASE_DIR" -type f \( -iname "*.mp4" -o -iname "*.mov" -o -iname "*.mkv" -o -iname "*.avi" -o -iname "*.mod" -o -iname "*.mts" \) -print0)
+done < <(find "$BASE_DIR" -type f \( -iname "*.mp4" -o -iname "*.mov" -o -iname "*.mkv" -o -iname "*.avi" -o -iname "*.mod" -o -iname "*.mts" -o -iname "*.mpg" -o -iname "*.wmv" -o -iname "*.m4v" -o -iname "*.3gp" \) ! -iname ".*" -print0)
+
 
 total_files=${#files[@]}
 printf "Found %d files to process\n" "$total_files"
