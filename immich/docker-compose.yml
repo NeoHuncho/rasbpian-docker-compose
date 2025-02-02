@@ -8,6 +8,14 @@
 name: immich
 
 services:
+  immich-upload-optimizer:
+    image: ghcr.io/miguelangel-nubla/immich-upload-optimizer:latest
+    ports:
+      - "2283:2283"
+    environment:
+      IUO_UPSTREAM: ${IMMICH_SERVER_URL}
+    depends_on:
+      - immich-server
   immich-server:
     container_name: immich_server
     image: ghcr.io/immich-app/immich-server:${IMMICH_VERSION:-release}
@@ -70,14 +78,7 @@ services:
         'wal_compression=on',
       ]
     restart: always
-  immich-upload-optimizer:
-    image: ghcr.io/miguelangel-nubla/immich-upload-optimizer:latest
-    ports:
-      - "2283:2283"
-    environment:
-      IUO_UPSTREAM: ${IMMICH_SERVER_URL}
-    depends_on:
-      - immich-server
+
 
 volumes:
   model-cache:
