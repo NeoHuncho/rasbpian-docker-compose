@@ -78,27 +78,6 @@ services:
       IUO_UPSTREAM: ${IMMICH_SERVER_URL}
     depends_on:
       - immich-server
-    tasks:
-      - name: handbrake
-        command: HandBrakeCLI --preset-import-file handbrake.json -Z immich-upload-optimizer -i {{.folder}}/{{.name}}.{{.extension}} -o {{.folder}}/{{.name}}-new.mkv && rm {{.folder}}/{{.name}}.{{.extension}}
-        extensions:
-          - 3gp
-          - 3gpp
-          - avi
-          - flv
-          - m4v
-          - mkv
-          - mts
-          - m2ts
-          - m2t
-          - mp4
-          - insv
-          - mpg
-          - mpe
-          - mpeg
-          - mov
-          - webm
-          - wmv
 
 volumes:
   model-cache:
