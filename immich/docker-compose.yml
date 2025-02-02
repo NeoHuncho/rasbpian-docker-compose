@@ -69,7 +69,7 @@ services:
       ]
     restart: always
   immich-upload-optimizer:
-    image: ghcr.io/miguelangel-nubla/immich-upload-optimizer:latest
+    image: ghcr.io/miguelangel-nubla/immich-upload-optimizer:v0.4.5‑arm64v8
     ports:
       - "2283:2283"
     environment:
