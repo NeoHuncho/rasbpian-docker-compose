@@ -12,5 +12,6 @@ services:
       - PLEX_CLAIM=${PLEX_CLAIM}
     volumes:
       - /mainDrive/apps/plex:/config
-      - /plexDrive:/media
+      - /mainDrive/media:/media
+      - /plexDrive:/plexdrive
     restart: unless-stopped
