@@ -5,7 +5,7 @@ services:
       - NET_ADMIN
     volumes:
       - /mainDrive/torrents:/data
-      - /mainDrive/media:/media
+      - /plexDrive:/media
       - /mainDrive/apps/transmission:/config
     environment:
       - OPENVPN_PROVIDER=PIA
