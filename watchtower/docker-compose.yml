@@ -8,7 +8,7 @@ services:
         environment:
             - TZ=Europe/Paris
             - WATCHTOWER_MONITOR_ONLY=false
-            - WATCHTOWER_SCHEDULE=0 0 13 ? * THU
+            - WATCHTOWER_SCHEDULE=0 0 4 ? * SAT
             - WATCHTOWER_CLEANUP=true
             - WATCHTOWER_NOTIFICATIONS=email
             - WATCHTOWER_NOTIFICATION_EMAIL_FROM=${MAILER_SENDER}
