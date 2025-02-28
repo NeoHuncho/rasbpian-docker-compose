@@ -14,8 +14,7 @@ services:
       - "2283:2283"
     environment:
       IUO_UPSTREAM: ${IMMICH_SERVER_URL}
-    volumes:
-      - ${OPTIMIZER_TASK_LOCATION}:/etc/immich-upload-optimizer/config
+      IUO_TASKS_FILE: /etc/immich-upload-optimizer/bundled-configs/profile1/tasks.yaml
     depends_on:
       - immich-server
   immich-server:
