@@ -8,6 +8,16 @@
 name: immich
 
 services:
+  immich-upload-optimizer:
+    image: ghcr.io/miguelangel-nubla/immich-upload-optimizer:latest
+    ports:
+      - "2283:2283"
+    environment:
+      IUO_UPSTREAM: ${IMMICH_SERVER_URL}
+    volumes:
+      - ${OPTIMIZER_TASK_LOCATION}:/etc/immich-upload-optimizer/config
+    depends_on:
+      - immich-server
   immich-server:
     container_name: immich_server
     image: ghcr.io/immich-app/immich-server:${IMMICH_VERSION:-release}
@@ -21,8 +31,6 @@ services:
     environment:
       UPLOAD_LOCATION: ${UPLOAD_LOCATION}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
-    ports:
-      - '2283:2283'
     depends_on:
       - redis
       - database
