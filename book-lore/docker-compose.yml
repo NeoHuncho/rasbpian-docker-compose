@@ -6,6 +6,7 @@ services:
       - PUID=1000 # User ID to ensure correct file permissions
       - PGID=1000 # Group ID to ensure correct file permissions
       - TZ=Etc/UTC # Set the timezone for logs and system operations
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} # Replace with a strong password for the database
     depends_on:
       mariadb:
         condition: service_healthy
