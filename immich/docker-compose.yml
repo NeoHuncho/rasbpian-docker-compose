@@ -14,6 +14,7 @@ services:
       - "2283:2283"
     environment:
       IUO_UPSTREAM: ${IMMICH_SERVER_URL}
+      IUO_MAX_PARALLEL_JOBS: "2"  # Control parallel processing
     deploy:
       resources:
         limits:
@@ -26,6 +27,15 @@ services:
       - ${OPTIMIZER_TASK_LOCATION}:/etc/immich-upload-optimizer/config
     depends_on:
       - immich-server
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:2283"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    networks:
+      - default
   immich-server:
     container_name: immich_server
     image: ghcr.io/immich-app/immich-server:${IMMICH_VERSION:-release}
