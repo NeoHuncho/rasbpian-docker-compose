@@ -15,6 +15,14 @@ services:
     environment:
       IUO_UPSTREAM: http://immich-server:2283
       IUO_MAX_PARALLEL_JOBS: "2"  # Control parallel processing
+    deploy:
+      resources:
+        limits:
+          cpus: '3.1'   
+          memory: '2G'  
+        reservations:
+          cpus: '0.5'
+          memory: '512M'
     volumes:
       - ${OPTIMIZER_TASK_LOCATION}:/etc/immich-upload-optimizer/config
     depends_on:
