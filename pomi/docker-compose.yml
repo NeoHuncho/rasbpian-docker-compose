@@ -9,6 +9,7 @@ services:
     environment:
       - DATABASE_URL=postgres://user:password@db:5432/pomodoro
       - REDIS_URL=redis://redis:6379
+      - NODE_ENV=production
     restart: always
 
   db:
