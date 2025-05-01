@@ -9,5 +9,5 @@ services:
       - /var/cache/ntfy:/var/cache/ntfy
       - /etc/ntfy:/etc/ntfy
     ports:
-      - 8083:80
+      - 3234:80
     restart: unless-stopped
