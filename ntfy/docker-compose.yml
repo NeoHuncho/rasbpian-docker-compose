@@ -1,5 +1,4 @@
 version: "2.3"
-
 services:
   ntfy:
     image: binwiederhier/ntfy
@@ -10,5 +9,5 @@ services:
       - /var/cache/ntfy:/var/cache/ntfy
       - /etc/ntfy:/etc/ntfy
     ports:
-      - 8083:80
+      - 80:80
     restart: unless-stopped
