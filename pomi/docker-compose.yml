@@ -10,6 +10,7 @@ services:
       - DATABASE_URL=postgres://user:password@db:5432/pomodoro
       - REDIS_URL=redis://redis:6379
       - NODE_ENV=production
+      - NTFY_URL=${NTFY_URL}
     restart: always
 
   db:
