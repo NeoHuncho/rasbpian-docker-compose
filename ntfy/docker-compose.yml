@@ -5,6 +5,8 @@ services:
     container_name: ntfy
     command:
       - serve
+    environment:
+      - NTFY_UPSTREAM_BASE_URL: "https://ntfy.sh"
     volumes:
       - /var/cache/ntfy:/var/cache/ntfy
       - /etc/ntfy:/etc/ntfy
