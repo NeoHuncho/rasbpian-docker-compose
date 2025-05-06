@@ -7,7 +7,7 @@ services:
       - serve
     environment:
       NTFY_UPSTREAM_BASE_URL: "https://ntfy.sh"
-      BASE_URL: ${NTFY_URL}
+      NTFY_BASE_URL: ${NTFY_URL}
     volumes:
       - /var/cache/ntfy:/var/cache/ntfy
       - /etc/ntfy:/etc/ntfy
