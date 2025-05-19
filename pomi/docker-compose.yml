@@ -11,7 +11,7 @@ services:
       - REDIS_URL=redis://redis:6379
       - NODE_ENV=production
       - NTFY_URL=${NTFY_URL}
-    restart: always
+    restart: unless-stopped
 
   db:
     image: postgres:alpine
@@ -21,9 +21,10 @@ services:
       POSTGRES_DB: pomodoro
     volumes:
       - /mainDrive/apps/pomi/db:/var/lib/postgresql/data
+    restart: unless-stopped
 
   redis:
     image: redis:alpine
-    restart: always
+    restart: unless-stopped
     ports:
       - '6379:6379'
