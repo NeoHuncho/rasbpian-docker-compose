@@ -2,7 +2,7 @@ version: '3'
 
 services:
   vikunja:
-    image: vikunja/vikunja
+    image: vikunja/vikunja:latest
     environment:
       VIKUNJA_SERVICE_PUBLICURL: ${VIKUNJA_SERVICE_PUBLICURL}
       VIKUNJA_DATABASE_HOST: db
