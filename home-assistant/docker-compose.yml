@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  homeassistant:
+    image: homeassistant/home-assistant:stable
+    container_name: homeassistant
+    environment:
+      - TZ=Europe/Paris
+    ports:
+      - 8123:8123
+    volumes:
+      - /mainDrive/apps/home-assistant:/config
+    restart: always
+
+volumes:
+  config:
