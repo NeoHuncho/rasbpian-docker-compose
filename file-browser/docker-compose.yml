@@ -7,7 +7,7 @@ services:
       - /mainDrive:/srv/mainDrive
       - /plexDrive:/srv/plexDrive
       - /mainDrive/apps/file-browser/db:/database/filebrowser.db
-      - /mainDrive/apps/file-browser/settings.json:/config/settings.json
+      - /mainDrive/apps/file-browser/config:/config
     environment:
       - PUID=$(id -u)
       - PGID=$(id -g)
