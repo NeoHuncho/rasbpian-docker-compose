@@ -1,0 +1,15 @@
+version: '3'
+services:
+  filebrowser:
+    image: filebrowser/filebrowser:latest
+    container_name: filebrowser
+    volumes:
+      - /mainDrive:/srv/mainDrive
+      - /plexDrive:/srv/plexDrive
+      - /mainDrive/apps/file-browser/db:/database/filebrowser.db
+      - /mainDrive/apps/file-browser/settings.json:/config/settings.json
+    environment:
+      - PUID=$(id -u)
+      - PGID=$(id -g)
+    ports:
+      - 8095:80
