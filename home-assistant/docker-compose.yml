@@ -27,9 +27,7 @@ services:
       - /mainDrive/apps/piper:/data
     command: 
       - "--voice=en_US-lessac-medium"
-      - "--language=en"
       - "--speaker=0"
-      - "--quality=medium"
       - "--data-dir=/data"
     restart: unless-stopped
 
