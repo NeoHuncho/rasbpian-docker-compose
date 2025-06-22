@@ -9,7 +9,7 @@ services:
       - /mainDrive/apps/file-browser/db:/database/filebrowser.db
       - /mainDrive/apps/file-browser/config:/config
     environment:
-      - PUID=$(id -u)
-      - PGID=$(id -g)
+      - PUID=1000
+      - PGID=1000
     ports:
       - 8095:80
