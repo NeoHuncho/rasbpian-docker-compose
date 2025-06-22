@@ -9,7 +9,7 @@ name: immich
 
 services:
   immich-upload-optimizer:
-    image: ghcr.io/miguelangel-nubla/immich-upload-optimizer:lastest
+    image: ghcr.io/miguelangel-nubla/immich-upload-optimizer:latest
     ports:
       - "2283:2283"
     environment:
