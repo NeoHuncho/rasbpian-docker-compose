@@ -18,6 +18,20 @@ services:
       - /mainDrive/apps/whisper:/data
     command: [ "--model", "small-int8", "--language", "en" ]
     restart: unless-stopped
+  wyoming-piper:
+    image: rhasspy/wyoming-piper
+    container_name: wyoming-piper
+    ports:
+      - "10200:10200"
+    volumes:
+      - /mainDrive/apps/piper:/data
+    command: 
+      - "--voice=en_US-lessac-medium"
+      - "--language=en"
+      - "--speaker=0"
+      - "--quality=medium"
+      - "--data-dir=/data"
+    restart: unless-stopped
 
 volumes:
   config:
