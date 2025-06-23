@@ -13,3 +13,4 @@ services:
       - PGID=1000
     ports:
       - 8095:80
+    restart: unless-stopped
