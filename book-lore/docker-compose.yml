@@ -8,7 +8,7 @@ services:
       - TZ=Etc/UTC # Set the timezone for logs and system operations
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} # Replace with a strong password for the database
     depends_on:
-      mariadb:
+      booklore-mariadb:
         condition: service_healthy
     ports:
       - "6060:6060"
