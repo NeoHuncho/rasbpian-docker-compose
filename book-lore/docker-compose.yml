@@ -1,13 +1,14 @@
 services:
-  booklore-backend:
+  booklore:
     image: ghcr.io/adityachandelgit/booklore-app:latest
+    container_name: booklore-backend
     environment:
       - PUID=1000 # User ID to ensure correct file permissions
       - PGID=1000 # Group ID to ensure correct file permissions
       - TZ=Etc/UTC # Set the timezone for logs and system operations
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} # Replace with a strong password for the database
     depends_on:
-      booklore-mariadb:
+      mariadb:
         condition: service_healthy
     ports:
       - "6060:6060"
@@ -16,8 +17,9 @@ services:
       - /mainDrive/media/books:/books # Replace the left side before colon with your book storage path, keep the right side unchanged
     restart: unless-stopped
 
-  booklore-mariadb:
+  mariadb:
     image: yobasystems/alpine-mariadb:latest
+    container_name: booklore-mariadb
     environment:
       - PUID=1000 # Ensure correct file ownership for database files
       - PGID=1000 # Ensure correct file ownership for database files
