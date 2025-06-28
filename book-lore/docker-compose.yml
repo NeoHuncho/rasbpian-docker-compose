@@ -1,5 +1,5 @@
 services:
-  booklore:
+  booklore-backend:
     image: ghcr.io/adityachandelgit/booklore-app:latest
     container_name: booklore
     environment:
@@ -17,8 +17,8 @@ services:
       - /mainDrive/media/books:/books # Replace the left side before colon with your book storage path, keep the right side unchanged
     restart: unless-stopped
 
-  mariadb:
-    image: lscr.io/linuxserver/mariadb:11.4.5
+  booklore-mariadb:
+    image: yobasystems/alpine-mariadb:latest
     container_name: mariadb
     environment:
       - PUID=1000 # Ensure correct file ownership for database files
