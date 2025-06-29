@@ -1,0 +1,17 @@
+### EXAMPLE DOCKER COMPOSE ###
+services:
+  audiobookshelf:
+    image: ghcr.io/advplyr/audiobookshelf:latest
+    ports:
+      - 13378:80
+    volumes:
+      - /mainDrive/media/audiobooks:/audiobooks
+      - /mainDrive/media/podcasts:/podcasts
+      - /mainDrive/apps/audiobookshelf/metadata:/metadata
+      - /mainDrive/apps/audiobookshelf/config:/config
+    environment:
+      - PUID=1000 
+      - PGID=1000 
+    restart: unless-stopped
+    
+    

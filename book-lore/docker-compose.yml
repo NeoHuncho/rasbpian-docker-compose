@@ -3,30 +3,30 @@ services:
     image: ghcr.io/adityachandelgit/booklore-app:latest
     container_name: booklore-backend
     environment:
-      - PUID=1000 # User ID to ensure correct file permissions
-      - PGID=1000 # Group ID to ensure correct file permissions
-      - TZ=Etc/UTC # Set the timezone for logs and system operations
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} # Replace with a strong password for the database
+      - PUID=1000 
+      - PGID=1000 
+      - TZ=Etc/UTC
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     depends_on:
       mariadb:
         condition: service_healthy
     ports:
       - "6060:6060"
     volumes:
-      - /mainDrive/apps/bookLore/data:/app/data # Replace the left side before colon with your system path, keep the right side unchanged
-      - /mainDrive/media/books:/books # Replace the left side before colon with your book storage path, keep the right side unchanged
+      - /mainDrive/apps/bookLore/data:/app/data
+      - /mainDrive/media/books:/books
     restart: unless-stopped
 
   mariadb:
     image: yobasystems/alpine-mariadb:latest
     container_name: booklore-mariadb
     environment:
-      - PUID=1000 # Ensure correct file ownership for database files
-      - PGID=1000 # Ensure correct file ownership for database files
-      - TZ=Etc/UTC # Set the timezone for logs and database operations
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} # Replace with a strong password for the database
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     volumes:
-      - /mainDrive/apps/bookLore/db:/config # Replace the left side before colon with your system path, keep the right side unchanged
+      - /mainDrive/apps/bookLore/db:/config
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "mariadb-admin", "ping", "-h", "localhost"]
