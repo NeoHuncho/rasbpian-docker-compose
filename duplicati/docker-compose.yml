@@ -11,6 +11,7 @@ services:
     volumes:
       - /mainDrive/apps/duplicati:/config #Config Files
       - /backupDrive1:/backupDrive1 #Backup Drive
+      - /backupDrive2:/backupDrive2 #Backup Drive
       - /mainDrive:/mainDrive #What to Backup
       - /plexDrive:/plexDrive #What to Backup
     ports:
