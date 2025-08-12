@@ -1,12 +1,11 @@
 services:
   booklore:
-    image: ghcr.io/adityachandelgit/booklore-app:latest
-    container_name: booklore-backend
+    image: booklore/booklore:latest
+    container_name: booklore_server
     environment:
-      - PUID=1000 
-      - PGID=1000 
-      - TZ=Etc/UTC
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - DATABASE_USERNAME=${MYSQL_USER}
+      - DATABASE_PASSWORD=${MYSQL_PASSWORD}
+      - DATABASE_URL=jdbc:mariadb://mariadb:3306/${MYSQL_DATABASE}
     depends_on:
       mariadb:
         condition: service_healthy
@@ -18,13 +17,13 @@ services:
     restart: unless-stopped
 
   mariadb:
-    image: yobasystems/alpine-mariadb:latest
+    image: lscr.io/linuxserver/mariadb:11.4
     container_name: booklore-mariadb
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
       - /mainDrive/apps/bookLore/db:/config
     restart: unless-stopped
