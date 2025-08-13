@@ -10,14 +10,6 @@ services:
     volumes:
       - /mainDrive/apps/home-assistant:/config
     restart: always
-  wyoming-whisper:
-    image: rhasspy/wyoming-whisper
-    ports:
-      - "10300:10300"
-    volumes:
-      - /mainDrive/apps/whisper:/data
-    command: [ "--model", "small-int8", "--language", "en" ]
-    restart: unless-stopped
   wyoming-piper:
     image: rhasspy/wyoming-piper
     container_name: wyoming-piper
@@ -30,6 +22,14 @@ services:
       - "--speaker=0"
       - "--data-dir=/data"
     restart: unless-stopped
+  # wyoming-whisper: replaced with openai api because of performance issues
+  #   image: rhasspy/wyoming-whisper
+  #   ports:
+  #     - "10300:10300"
+  #   volumes:
+  #     - /mainDrive/apps/whisper:/data
+  #   command: [ "--model", "small-int8", "--language", "en" ]
+  #   restart: unless-stopped
 
 volumes:
   config:
