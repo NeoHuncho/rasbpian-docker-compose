@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  mealie:
+    image: ghcr.io/mealie-recipes/mealie:latest  # Specifies the Mealie Docker image and version.
+    container_name: mealie                      # Names the container for easier management.
+    restart: always                              # Ensures the container restarts automatically unless stopped.
+    ports:
+      - "9925:9000"                             # Maps port 9925 on the host to port 9000 in the container.
+    volumes:
+      - /mainDrive/apps/mealie:/app/data/                  # Persists data in a named volume.
+    environment:
+      - ALLOW_SIGNUP=true                       # Allows new user signups on the Mealie instance.
+      - PUID=1000                               # Sets the user ID for the container.
+      - PGID=1000                               # Sets the group ID for the container.
+      - TZ=Europe/Paris                        # Sets the timezone for the container.
+      - MAX_WORKERS=1                           # Limits the number of workers to 1.
+      - WEB_CONCURRENCY=1                       # Sets the concurrency level for web workers.
+      - BASE_URL=https://recipes.coprin.ovh  # The base URL where Mealie is accessed.
+
+volumes:
+  mealie-data:                                  # Declares a named volume for persisting application data.

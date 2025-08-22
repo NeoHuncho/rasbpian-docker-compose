@@ -15,7 +15,6 @@ services:
       - /backupDrive3:/backupDrive3 #Backup Drive
       - /mainDrive:/mainDrive #What to Backup
       - /plexDrive:/plexDrive #What to Backup
-      - /var/run/docker.sock:/var/run/docker.sock
     ports:
       - 8200:8200
     network_mode: host
