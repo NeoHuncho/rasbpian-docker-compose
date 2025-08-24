@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  loki:
+    image: grafana/loki:latest
+    container_name: loki
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+    volumes:
+      - /mainDrive/grafana-loki/loki-config.yaml:/etc/loki/local-config.yaml:ro
+
+  promtail:
+    image: grafana/promtail:latest
+    container_name: promtail
+    volumes:
+      - /mainDrive/grafana-loki/promtail-config.yaml:/etc/promtail/config.yml:ro
+      - /mainDrive/grafana-loki/log:/var/log:ro
+    command: -config.file=/etc/promtail/config.yml
+    depends_on:
+      - loki
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=${GF_SECURITY_ADMIN_USER}
+      - GF_SECURITY_ADMIN_PASSWORD=${GF_SECURITY_ADMIN_PASSWORD}
+    depends_on:
+      - loki
