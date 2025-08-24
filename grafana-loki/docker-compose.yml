@@ -10,9 +10,7 @@ services:
     volumes:
       - /mainDrive/apps/grafana-loki/loki-config.yaml:/etc/loki/local-config.yaml:ro
       - /mainDrive/apps/grafana-loki/loki-data:/var/loki 
-    environment:
-      - PUID=1000
-      - PGID=1000
+    
 
   promtail:
     image: grafana/promtail:latest
