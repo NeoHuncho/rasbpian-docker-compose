@@ -9,6 +9,7 @@ services:
     command: -config.file=/etc/loki/local-config.yaml
     volumes:
       - /mainDrive/apps/grafana-loki/loki-config.yaml:/etc/loki/local-config.yaml:ro
+      - /mainDrive/apps/grafana-loki/loki-data:/var/loki 
 
   promtail:
     image: grafana/promtail:latest
