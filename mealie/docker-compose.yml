@@ -3,7 +3,7 @@ services:
   mealie:
     image: ghcr.io/mealie-recipes/mealie:latest  # Specifies the Mealie Docker image and version.
     container_name: mealie                      # Names the container for easier management.
-    restart: always                              # Ensures the container restarts automatically unless stopped.
+    restart: unless-stopped                # Ensures the container restarts automatically unless stopped.
     ports:
       - "9925:9000"                             # Maps port 9925 on the host to port 9000 in the container.
     volumes:

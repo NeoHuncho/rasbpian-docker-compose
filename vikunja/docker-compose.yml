@@ -24,7 +24,7 @@ services:
       - /mainDrive/apps/vikunja/app:/app/vikunja/files
     depends_on:
       - db
-    restart: unless-stopped
+    restart: always
   db:
     image: yobasystems/alpine-mariadb:latest
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
@@ -35,4 +35,4 @@ services:
       MYSQL_DATABASE: vikunja
     volumes:
       - /mainDrive/apps/vikunja/db:/var/lib/mysql
-    restart: unless-stopped
+    restart: always

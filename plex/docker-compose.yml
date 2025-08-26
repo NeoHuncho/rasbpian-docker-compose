@@ -14,4 +14,4 @@ services:
       - /mainDrive/apps/plex:/config
       - /mainDrive/media:/media
       - /plexDrive:/plexDrive
-    restart: unless-stopped
+    restart: always
