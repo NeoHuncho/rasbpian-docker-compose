@@ -21,7 +21,7 @@ services:
       - "--voice=en_US-lessac-medium"
       - "--speaker=0"
       - "--data-dir=/data"
-    restart: unless-stopped
+    restart: always
 
 volumes:
   config:
