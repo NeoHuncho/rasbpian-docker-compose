@@ -15,8 +15,8 @@ services:
       - "GLANCES_OPT=-w"
     ports:
       - "61208:61208"
-    # command: >
-    #   glances --time 10
-    #       --export csv
-    #       --export-csv-file /glances/logs/glances.csv
-    #       --export-csv-overwrite
+    command: >
+      glances --time 10
+          --export csv
+          --export-csv-file /glances/logs/glances.csv
+          --export-csv-overwrite
