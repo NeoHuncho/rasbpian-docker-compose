@@ -11,12 +11,10 @@ services:
       - /backupDrive1:/mnt/backupDrive1
       - /backupDrive2:/mnt/backupDrive2
       - /backupDrive3:/mnt/backupDrive3
-    environment:
-      - "GLANCES_OPT=-w"
     ports:
       - "61208:61208"
     command: >
-      glances --time 10
-          --export csv
-          --export-csv-file /glances/logs/glances.csv
-          --export-csv-overwrite
+      glances -w --time 10
+              --export csv
+              --export-csv-file /glances/logs/glances.csv
+              --export-csv-overwrite
