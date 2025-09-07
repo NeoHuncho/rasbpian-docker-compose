@@ -1,6 +1,20 @@
 version: '3'
 services:
-  monitoring:
+  glances-web:
+    image: nicolargo/glances:latest
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /mainDrive:/mnt/mainDrive
+      - /plexDrive:/mnt/plexDrive
+      - /backupDrive1:/mnt/backupDrive1
+      - /backupDrive2:/mnt/backupDrive2
+      - /backupDrive3:/mnt/backupDrive3
+    ports:
+      - "61208:61208"
+    command: glances -w
+
+  glances-logger:
     image: nicolargo/glances:latest
     restart: always
     volumes:
@@ -11,10 +25,8 @@ services:
       - /backupDrive1:/mnt/backupDrive1
       - /backupDrive2:/mnt/backupDrive2
       - /backupDrive3:/mnt/backupDrive3
-    ports:
-      - "61208:61208"
     command: >
-      glances -w --time 10
+      glances --time 10
               --export csv
               --export-csv-file /glances/logs/glances.csv
               --export-csv-overwrite
