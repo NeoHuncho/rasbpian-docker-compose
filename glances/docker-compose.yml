@@ -13,20 +13,3 @@ services:
     ports:
       - "61208:61208"
     command: glances -w
-
-  glances-logger:
-    image: nicolargo/glances:latest
-    restart: always
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /var/log/glances:/glances/logs
-      - /mainDrive:/mnt/mainDrive
-      - /plexDrive:/mnt/plexDrive
-      - /backupDrive1:/mnt/backupDrive1
-      - /backupDrive2:/mnt/backupDrive2
-      - /backupDrive3:/mnt/backupDrive3
-    command: >
-      glances --time 10
-              --export csv
-              --export-csv-file /glances/logs/glances.csv
-              --export-csv-overwrite
