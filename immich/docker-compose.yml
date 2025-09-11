@@ -10,8 +10,8 @@ name: immich
 services:
   immich-upload-optimizer:
     image: ghcr.io/miguelangel-nubla/immich-upload-optimizer:latest
-    ports:
-      - "2283:2283"
+    # ports:
+    #   - "2283:2283"
     environment:
       IUO_UPSTREAM: http://immich-server:2283
       IUO_MAX_PARALLEL_JOBS: "2"  # Control parallel processing
@@ -42,8 +42,8 @@ services:
     environment:
       UPLOAD_LOCATION: ${UPLOAD_LOCATION}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
-    # ports:
-    #   - "2283:2283"
+    ports:
+      - "2283:2283"
     depends_on:
       - redis
       - database
