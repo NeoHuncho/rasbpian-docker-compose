@@ -42,8 +42,8 @@ services:
     environment:
       UPLOAD_LOCATION: ${UPLOAD_LOCATION}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
-    ports:
-      - "2283:2283"
+    # ports:
+    #   - "2283:2283"
     depends_on:
       - redis
       - database
