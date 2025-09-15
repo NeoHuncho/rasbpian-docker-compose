@@ -41,8 +41,8 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - /mainDrive/apps/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
-      - /mainDrive/apps/prometheus/data:/prometheus
+          - /mainDrive/apps/prometheus:/etc/prometheus:ro
+          - /mainDrive/apps/prometheus/data:/prometheus
     restart: always
 
   cadvisor:
