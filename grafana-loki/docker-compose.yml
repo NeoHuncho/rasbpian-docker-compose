@@ -44,6 +44,10 @@ services:
       - /mainDrive/apps/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
       - /mainDrive/apps/prometheus/data:/prometheus
     restart: always
+    environment:
+      - PUID=1000
+      - PGID=1000 
+
 
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:latest
