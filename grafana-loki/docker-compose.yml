@@ -41,15 +41,15 @@ services:
     ports:
       - "9090:9090"
     volumes:
-          - /mainDrive/apps/prometheus:/etc/prometheus:ro
-          - /mainDrive/apps/prometheus/data:/prometheus
+      - /mainDrive/apps/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - /mainDrive/apps/prometheus/data:/prometheus
     restart: always
 
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:latest
     container_name: cadvisor
     ports:
-      - "8081:8080"
+      - "8082:8080"
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:ro
