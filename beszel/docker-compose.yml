@@ -19,4 +19,4 @@ services:
       LISTEN: 45876
       KEY: ${BESZEL_KEY}
       TOKEN: ${BESZEL_TOKEN}
-      HUB_URL: http://localhost:8090
+      HUB_URL: ${BESZEL_HUB_URL}
