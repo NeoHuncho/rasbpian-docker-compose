@@ -19,4 +19,4 @@ services:
       KEY: ${BESZEL_KEY}
       TOKEN: ${BESZEL_TOKEN}
       LISTEN: /beszel_socket/beszel.sock
-      HUB_URL: ${BESZEL_HUB_URL}
+      HUB_URL: http://0.0.0.0:8090
