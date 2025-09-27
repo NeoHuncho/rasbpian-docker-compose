@@ -9,7 +9,7 @@ services:
       - PGID=0
       - TZ=Europe/Paris
     volumes:
-      - /mainDrive/apps/duplicati:/config #Config Files
+      - /var/lib/docker-volumes/duplicati:/config #Config Files
       - /backupDrive1:/backupDrive1 #Backup Drive
       - /backupDrive2:/backupDrive2 #Backup Drive
       - /backupDrive3:/backupDrive3 #Backup Drive

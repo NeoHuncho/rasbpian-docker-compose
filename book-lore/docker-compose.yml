@@ -14,7 +14,7 @@ services:
     ports:
       - "6060:6060"
     volumes:
-      - /mainDrive/apps/bookLore/data:/app/data
+      - /var/lib/docker-volumes/bookLore/data:/app/data
       - /mainDrive/media/books:/books
     restart: unless-stopped
 
@@ -27,7 +27,7 @@ services:
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
-      - /mainDrive/apps/bookLore/db:/config
+      - /var/lib/docker-volumes/bookLore/db:/config
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "mariadb-admin", "ping", "-h", "localhost"]

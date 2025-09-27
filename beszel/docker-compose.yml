@@ -6,4 +6,4 @@ services:
     ports:
       - 8090:8090
     volumes:
-      - /mainDrive/apps/beszel:/beszel_data
+      - /var/lib/docker-volumes/beszel:/beszel_data

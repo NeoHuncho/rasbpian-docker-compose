@@ -12,5 +12,5 @@ services:
     ports:
       - 5055:5055
     volumes:
-      - /mainDrive/apps/overseerr:/app/config
+      - /var/lib/docker-volumes/overseerr:/app/config
     restart: unless-stopped

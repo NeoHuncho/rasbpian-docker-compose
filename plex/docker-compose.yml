@@ -11,7 +11,7 @@ services:
       - VERSION=docker
       - PLEX_CLAIM=${PLEX_CLAIM}
     volumes:
-      - /mainDrive/apps/plex:/config
+      - /var/lib/docker-volumes/plex:/config
       - /mainDrive/media:/media
       - /plexDrive:/plexDrive
     restart: always

@@ -8,7 +8,7 @@ services:
     ports:
       - 8123:8123
     volumes:
-      - /mainDrive/apps/home-assistant:/config
+      - /var/lib/docker-volumes/home-assistant:/config
     restart: always
   wyoming-piper:
     image: rhasspy/wyoming-piper
@@ -16,7 +16,7 @@ services:
     ports:
       - "10200:10200"
     volumes:
-      - /mainDrive/apps/piper:/data
+      - /var/lib/docker-volumes/piper:/data
     command: 
       - "--voice=en_US-lessac-medium"
       - "--speaker=0"

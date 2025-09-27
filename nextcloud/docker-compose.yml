@@ -6,7 +6,7 @@ services:
     command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
     restart: always
     volumes:
-      - /mainDrive/apps/nextcloud/db:/var/lib/mysql
+      - /var/lib/docker-volumes/nextcloud/db:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
@@ -20,5 +20,5 @@ services:
     links:
       - db
     volumes:
-      - /mainDrive/apps/nextcloud/app:/var/www/html
+      - /var/lib/docker-volumes/nextcloud/app:/var/www/html
     restart: always

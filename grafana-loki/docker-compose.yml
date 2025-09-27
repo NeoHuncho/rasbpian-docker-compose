@@ -8,16 +8,16 @@ services:
       - "3100:3100"
     command: -config.file=/etc/loki/local-config.yaml
     volumes:
-      - /mainDrive/apps/grafana-loki/loki-config.yaml:/etc/loki/local-config.yaml:ro
-      - /mainDrive/apps/grafana-loki/loki-data:/var/loki
+      - /var/lib/docker-volumes/grafana-loki/loki-config.yaml:/etc/loki/local-config.yaml:ro
+      - /var/lib/docker-volumes/grafana-loki/loki-data:/var/loki
     restart: always
 
   promtail:
     image: grafana/promtail:latest
     container_name: promtail
     volumes:
-      - /mainDrive/apps/grafana-loki/promtail-config.yaml:/etc/promtail/config.yml:ro
-      - /mainDrive/apps/grafana-loki/log:/var/log:ro
+      - /var/lib/docker-volumes/grafana-loki/promtail-config.yaml:/etc/promtail/config.yml:ro
+      - /var/lib/docker-volumes/grafana-loki/log:/var/log:ro
     command: -config.file=/etc/promtail/config.yml
     depends_on:
       - loki

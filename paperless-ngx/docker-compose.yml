@@ -4,13 +4,13 @@ services:
     image: docker.io/library/redis:7
     restart: unless-stopped
     volumes:
-      - /mainDrive/apps/paperless-ngx/redis:/data
+      - /var/lib/docker-volumes/paperless-ngx/redis:/data
 
   db:
     image: postgres:15-alpine
     restart: unless-stopped
     volumes:
-      - /mainDrive/apps/paperless-ngx/db:/var/lib/postgresql/data
+      - /var/lib/docker-volumes/paperless-ngx/db:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: paperless
       POSTGRES_USER: paperless
@@ -25,8 +25,8 @@ services:
     ports:
       - "8011:8000"
     volumes:
-      - /mainDrive/apps/paperless-ngx/data:/usr/src/paperless/data
-      - /mainDrive/apps/paperless-ngx/media:/usr/src/paperless/media
+      - /var/lib/docker-volumes/paperless-ngx/data:/usr/src/paperless/data
+      - /var/lib/docker-volumes/paperless-ngx/media:/usr/src/paperless/media
       - ./export:/usr/src/paperless/export
       - ./consume:/usr/src/paperless/consume
     environment:

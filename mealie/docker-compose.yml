@@ -7,7 +7,7 @@ services:
     ports:
       - "9925:9000"                             # Maps port 9925 on the host to port 9000 in the container.
     volumes:
-      - /mainDrive/apps/mealie:/app/data/                  # Persists data in a named volume.
+      - /var/lib/docker-volumes/mealie:/app/data/                  # Persists data in a named volume.
     environment:
       - ALLOW_SIGNUP=true                       # Allows new user signups on the Mealie instance.
       - PUID=1000                               # Sets the user ID for the container.

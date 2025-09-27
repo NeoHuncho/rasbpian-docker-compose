@@ -6,7 +6,7 @@ services:
     volumes:
       - /mainDrive/torrents:/data
       - /plexDrive:/media
-      - /mainDrive/apps/transmission:/config
+      - /var/lib/docker-volumes/transmission:/config
     environment:
       - OPENVPN_PROVIDER=PIA
       - OPENVPN_CONFIG=france

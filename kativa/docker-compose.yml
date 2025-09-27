@@ -4,7 +4,7 @@ services:
         image: lscr.io/linuxserver/kavita:latest
         volumes:
             - /mainDrive/media/books/kativaBooks:/books
-            - /mainDrive/apps/kativa:/config
+            - /var/lib/docker-volumes/kativa:/config
         ports:
             - "5000:5000"
         environment:

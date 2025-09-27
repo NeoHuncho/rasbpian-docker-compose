@@ -4,7 +4,7 @@ services:
     image: ghcr.io/mohamedbassem/hoarder-web:latest
     restart: unless-stopped
     volumes:
-      - /mainDrive/apps/hoarder/data:/data
+      - /var/lib/docker-volumes/hoarder/data:/data
     ports:
       - 3200:3000
     environment:
@@ -18,7 +18,7 @@ services:
     image: redis:7.2-alpine
     restart: unless-stopped
     volumes:
-      - /mainDrive/apps/hoarder/redis:/data
+      - /var/lib/docker-volumes/hoarder/redis:/data
   chrome:
     image: gcr.io/zenika-hub/alpine-chrome:123
     restart: unless-stopped
@@ -31,14 +31,14 @@ services:
     image: getmeili/meilisearch:v1.6
     restart: unless-stopped
     volumes:
-      - /mainDrive/apps/hoarder/meilisearch:/meili_data
+      - /var/lib/docker-volumes/hoarder/meilisearch:/meili_data
     environment:
       MEILI_MASTER_KEY: ${MEILI_MASTER_KEY}
   workers:
     image: ghcr.io/mohamedbassem/hoarder-workers:latest
     restart: unless-stopped
     volumes:
-      - /mainDrive/apps/hoarder/data:/data
+      - /var/lib/docker-volumes/hoarder/data:/data
     environment:
       REDIS_HOST: redis
       MEILI_ADDR: http://meilisearch:7700
