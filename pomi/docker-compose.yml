@@ -14,13 +14,13 @@ services:
     restart: always
 
   db:
-    image: postgres:alpine
+    image: postgres:15-alpine
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
       POSTGRES_DB: pomodoro
     volumes:
-      - /mainDrive/apps/pomi/db:/var/lib/postgresql/data
+      - /var/lib/docker-volumes/pomi-db:/var/lib/postgresql/data
     restart: always
 
   redis:
