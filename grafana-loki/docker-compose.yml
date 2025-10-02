@@ -10,6 +10,7 @@ services:
     volumes:
       - /var/lib/docker-volumes/grafana-loki/loki-config.yaml:/etc/loki/local-config.yaml:ro
       - /var/lib/docker-volumes/grafana-loki/loki-data:/var/loki
+      - /var/lib/docker-volumes/grafana-loki/loki-wal:/wal 
     restart: always
 
   promtail:
