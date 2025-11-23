@@ -8,33 +8,11 @@
 name: immich
 
 services:
-  immich-upload-optimizer:
-    image: ghcr.io/miguelangel-nubla/immich-upload-optimizer:latest
-    ports:
-      - "2283:2283"
-    environment:
-      IUO_UPSTREAM: http://immich-server:2283
-      IUO_MAX_PARALLEL_JOBS: "2"  # Control parallel processing
-    deploy:
-      resources:
-        limits:
-          cpus: '3.1'
-    volumes:
-      - ${OPTIMIZER_TASK_LOCATION}:/etc/immich-upload-optimizer/config
-    depends_on:
-      - immich-server
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:2283"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 20s
-    networks:
-      - default
   immich-server:
     container_name: immich_server
     image: ghcr.io/immich-app/immich-server:${IMMICH_VERSION:-release}
+    ports:
+      - "2283:2283"
     volumes:
       # Do not edit the next line. If you want to change the media storage location on your system, edit the value of UPLOAD_LOCATION in the .env file
       - ${UPLOAD_LOCATION}:/usr/src/app/upload
@@ -42,8 +20,6 @@ services:
     environment:
       UPLOAD_LOCATION: ${UPLOAD_LOCATION}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
-    # ports:
-    #   - "2283:2283"
     depends_on:
       - redis
       - database
