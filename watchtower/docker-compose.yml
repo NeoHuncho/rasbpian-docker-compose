@@ -1,7 +1,7 @@
 version: '2.1'
 services:
     watchtower:
-        image: containrrr/watchtower:latest
+        image: nickfedor/watchtower:latest
         container_name: watchtower
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
@@ -10,7 +10,7 @@ services:
             - WATCHTOWER_MONITOR_ONLY=false
             - WATCHTOWER_SCHEDULE=0 0 4 ? * SAT
             - WATCHTOWER_CLEANUP=true
-            # - WATCHTOWER_NOTIFICATIONS=none
+            - WATCHTOWER_NOTIFICATIONS=email
             - WATCHTOWER_NOTIFICATION_EMAIL_FROM=${MAILER_SENDER}
             - WATCHTOWER_NOTIFICATION_EMAIL_TO=${MAILER_SENDER}
             - WATCHTOWER_NOTIFICATION_EMAIL_SERVER=smtp.gmail.com
