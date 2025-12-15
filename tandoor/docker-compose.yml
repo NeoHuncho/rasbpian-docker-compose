@@ -1,0 +1,33 @@
+services:
+  db_recipes:
+    restart: always
+    image: postgres:16-alpine
+    volumes:
+      - /var/lib/docker-volumes/tandoor/postgresql:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=tandoor
+      - POSTGRES_USER=tandoor
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+
+  web_recipes:
+    restart: always
+    image: vabene1111/recipes:latest
+    environment:
+      - SECRET_KEY=${SECRET_KEY}
+      - ALLOWED_HOSTS=*
+      - DB_ENGINE=django.db.backends.postgresql
+      - POSTGRES_HOST=db_recipes
+      - POSTGRES_DB=tandoor
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=tandoor
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - TANDOOR_PORT=9925
+    volumes:
+      - /var/lib/docker-volumes/tandoor/static:/opt/recipes/staticfiles
+      - /var/lib/docker-volumes/tandoor/media:/opt/recipes/mediafiles
+    ports:
+      - "9925:9925"
+    depends_on:
+      - db_recipes
+volumes:
+  staticfiles:
