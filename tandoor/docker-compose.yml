@@ -29,5 +29,7 @@ services:
       - "9925:9925"
     depends_on:
       - db_recipes
-volumes:
-  staticfiles:
+
+networks:
+  default:
+    driver: bridge
