@@ -13,6 +13,8 @@ services:
       - OPENVPN_USERNAME=p3685704
       - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
       - LOCAL_NETWORK=${LOCAL_NETWORK}
+      - PUID=1000
+      - PGID=1000
     logging:
       driver: json-file
       options:
