@@ -46,7 +46,7 @@ services:
       timeout: 5s
       retries: 5
   postgres:
-    image: postgres:16
+    image: postgres:13.1-alpine
     ports:
       - '5332:5432'
     container_name: affine_postgres
