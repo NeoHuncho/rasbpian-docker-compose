@@ -16,8 +16,6 @@ services:
       # custom configurations
       - /var/lib/docker-volumes/affine/blobStorage:/root/.affine/storage
       - /var/lib/docker-volumes/affine/customConfig:/root/.affine/config
-    env_file:
-      - .env
     environment:
       - REDIS_SERVER_HOST=redis
       - DATABASE_URL=postgresql://affine:${POSTGRES_PASSWORD}@postgres:5432/affine
@@ -32,8 +30,6 @@ services:
       - /var/lib/docker-volumes/affine/blobStorage:/root/.affine/storage
       - /var/lib/docker-volumes/affine/customConfig:/root/.affine/config
     command: ['sh', '-c', 'node ./scripts/self-host-predeploy.js']
-    env_file:
-      - .env
     environment:
       - REDIS_SERVER_HOST=redis
       - DATABASE_URL=postgresql://affine:${POSTGRES_PASSWORD}@postgres:5432/affine
