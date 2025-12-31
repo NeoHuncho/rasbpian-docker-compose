@@ -1,44 +1,43 @@
-name: affine
 services:
   affine:
-    image: ghcr.io/toeverything/affine:${AFFINE_REVISION:-stable}
-    container_name: affine_server
+    image: ghcr.io/toeverything/affine-graphql:stable
+    container_name: affine_selfhosted
     ports:
-      - '${PORT:-3010}:3010'
+      - '3010:3010'
+      - '5555:5555'
     depends_on:
       redis:
         condition: service_healthy
-      affine_migration:
-        condition: service_completed_successfully
-    volumes:
-      # custom configurations
-      - /var/lib/docker-volumes/affine/blobStorage:/root/.affine/storage
-      - /var/lib/docker-volumes/affine/customConfig:/root/.affine/config
-    environment:
-      - REDIS_SERVER_HOST=redis
-      - DATABASE_URL=postgresql://affine:${POSTGRES_PASSWORD}@postgres:5432/affine
-      - AFFINE_INDEXER_ENABLED=false
-    restart: unless-stopped
-
-  affine_migration:
-    image: ghcr.io/toeverything/affine:${AFFINE_REVISION:-stable}
-    container_name: affine_migration_job
-    volumes:
-      # custom configurations
-      - /var/lib/docker-volumes/affine/blobStorage:/root/.affine/storage
-      - /var/lib/docker-volumes/affine/customConfig:/root/.affine/config
-    command: ['sh', '-c', 'node ./scripts/self-host-predeploy.js']
-    environment:
-      - REDIS_SERVER_HOST=redis
-      - DATABASE_URL=postgresql://affine:${POSTGRES_PASSWORD}@postgres:5432/affine
-      - AFFINE_INDEXER_ENABLED=false
-    depends_on:
-      redis:
+      postgres:
         condition: service_healthy
-
+    volumes:
+      # custom configurations
+      - /var/lib/docker-volumes/affine/customConfig:/root/.affine/config
+      # blob storage
+      - /var/lib/docker-volumes/affine/blobStorage:/root/.affine/storage
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '1000m'
+    restart: always
+    environment:
+      - AFFINE_CONFIG_PATH=/root/.affine/config
+      - REDIS_SERVER_HOST=redis
+      - DATABASE_URL=postgres://affine:${POSTGRES_PASSWORD}@postgres:5432/affine
+      - NODE_ENV=production
+      - AFFINE_ADMIN_EMAIL=${AFFINE_ADMIN_EMAIL}
+      - AFFINE_ADMIN_PASSWORD=${AFFINE_ADMIN_PASSWORD}
+      - AFFINE_SERVER_HOST=${AFFINE_SERVER_HOST}
+      - MAILER_HOST=smtp.gmail.com
+      - MAILER_PASSWORD=${MAILER_PASSWORD}
+      - MAILER_PORT=465
+      - MAILER_SECURE=true
+      - MAILER_SENDER=${MAILER_SENDER}
+      - MAILER_USER=${MAILER_SENDER}
   redis:
     image: redis
     container_name: affine_redis
+    restart: always
     volumes:
       - /var/lib/docker-volumes/affine/redis:/data
     healthcheck:
@@ -46,17 +45,22 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    restart: unless-stopped
-
   postgres:
-    image: pgvector/pgvector:pg16
+    image: postgres:13.1-alpine
+    ports:
+      - '5332:5432'
     container_name: affine_postgres
+    restart: always
     volumes:
       - /var/lib/docker-volumes/affine/postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U affine']
+      interval: 10s
+      timeout: 5s
+      retries: 5
     environment:
       POSTGRES_USER: affine
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: affine
-      POSTGRES_INITDB_ARGS: '--data-checksums'
-      POSTGRES_HOST_AUTH_METHOD: trust
-    restart: unless-stopped
+      PGDATA: /var/lib/postgresql/data/pgdata
+      
