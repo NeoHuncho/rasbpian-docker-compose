@@ -33,8 +33,6 @@ services:
       - DATABASE_URL=postgresql://affine:${POSTGRES_PASSWORD}@postgres:5432/affine
       - AFFINE_INDEXER_ENABLED=false
     depends_on:
-      postgres:
-        condition: service_healthy
       redis:
         condition: service_healthy
 
