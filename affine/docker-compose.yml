@@ -63,8 +63,9 @@ services:
       POSTGRES_DB: affine
       PGDATA: /var/lib/postgresql/data/pgdata
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U affine']
+      test: ['CMD-SHELL', 'pg_isready -U affine -d affine']
       interval: 10s
       timeout: 5s
-      retries: 5
+      retries: 10
+      start_period: 30s
     restart: unless-stopped
