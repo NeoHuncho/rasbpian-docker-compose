@@ -1,6 +1,6 @@
 services:
   affine:
-    image: ghcr.io/toeverything/affine-graphql:stable
+    image: ghcr.io/toeverything/affine:stable
     container_name: affine_selfhosted
     ports:
       - '3010:3010'
@@ -46,7 +46,7 @@ services:
       timeout: 5s
       retries: 5
   postgres:
-    image: postgres:13.1-alpine
+    image: pgvector/pgvector:pg16
     ports:
       - '5332:5432'
     container_name: affine_postgres
