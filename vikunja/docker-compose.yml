@@ -26,7 +26,7 @@ services:
       - db
     restart: always
   db:
-    image: yobasystems/alpine-mariadb:12.1
+    image: yobasystems/alpine-mariadb:11.4
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     environment:
       MYSQL_ROOT_PASSWORD: supersecret
