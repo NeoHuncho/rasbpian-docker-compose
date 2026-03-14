@@ -3,13 +3,12 @@ services:
     image: ghcr.io/lukegus/termix:latest
     container_name: termix
     restart: unless-stopped
-    ports:
-      - '4567:8080'
+    network_mode: host
     volumes:
       - termix-data:/app/data
     environment:
       NODE_OPTIONS: '--dns-result-order=ipv4first'
-      PORT: '8080'
+      PORT: '4567'
 
 volumes:
   termix-data:
