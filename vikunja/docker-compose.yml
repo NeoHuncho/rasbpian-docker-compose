@@ -25,6 +25,8 @@ services:
     depends_on:
       - db
     restart: always
+    networks:
+      - proxy
   db:
     image: yobasystems/alpine-mariadb:11.4
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
