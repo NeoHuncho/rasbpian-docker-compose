@@ -3,7 +3,6 @@ name: affine
 services:
   affine:
     image: ghcr.io/toeverything/affine:stable
-    container_name: affine_server
     ports:
       - '3010:3010'
     depends_on:
