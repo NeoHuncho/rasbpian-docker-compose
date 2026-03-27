@@ -39,6 +39,6 @@ services:
       - /var/lib/docker-volumes/vikunja/db:/var/lib/mysql
     restart: always
 
-  networks:
+networks:
   proxy:
     external: true
