@@ -1,4 +1,5 @@
 version: "3.9"
+
 services:
   tunnel:
     container_name: cloudflared-tunnel
@@ -7,3 +8,9 @@ services:
     command: tunnel run
     environment:
       - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+    networks:
+      - proxy 
+
+networks:
+  proxy:
+    external: true 

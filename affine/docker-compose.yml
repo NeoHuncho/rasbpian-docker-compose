@@ -38,6 +38,8 @@ services:
       - MAILER_SENDER=${MAILER_SENDER}
       - MAILER_USER=${MAILER_SENDER}
       - AFFINE_INDEXER_ENABLED=false
+    networks:
+      - proxy
 
   affine_migration:
     image: ghcr.io/toeverything/affine:stable
@@ -87,3 +89,6 @@ services:
       POSTGRES_HOST_AUTH_METHOD: trust
       PGDATA: /var/lib/postgresql/data/pgdata
       
+networks:
+  proxy:
+    external: true
