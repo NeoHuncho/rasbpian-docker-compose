@@ -3,6 +3,7 @@ services:
   homeassistant:
     image: homeassistant/home-assistant:stable
     container_name: homeassistant
+    network_mode: host
     environment:
       - TZ=Europe/Paris
     ports:
