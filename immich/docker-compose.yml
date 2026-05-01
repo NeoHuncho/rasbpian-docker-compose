@@ -37,8 +37,8 @@ services:
     volumes:
       # - model:/cache
       - ${MODEL_CACHE_LOCATION}:/cache
-    env_file:
-      - .env
+    environment:
+      MODEL_CACHE_LOCATION: ${MODEL_CACHE_LOCATION}
     restart: always
     healthcheck:
       disable: false
