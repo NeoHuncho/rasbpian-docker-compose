@@ -1,6 +1,6 @@
 services:
   backend:
-    image: neohuncho/pomi-backend:latest
+    image: ghcr.io/host-it-labs/pomi-backend:latest
     ports:
       - '3001:3000'
     depends_on:
