@@ -4,16 +4,23 @@ services:
     ports:
       - '3001:3000'
     depends_on:
-      - db
-      - redis
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
     environment:
-      - DATABASE_URL=postgres://user:password@db:5432/pomodoro
-      - REDIS_URL=redis://redis:6379
-      - NODE_ENV=production
-      - FIREBASE_SERVICE_ACCOUNT_JSON=${FIREBASE_SERVICE_ACCOUNT_JSON}
-      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY:-}
-      - OPENROUTER_HTTP_REFERER=${OPENROUTER_HTTP_REFERER:-https://pomi.app}
-      - GITHUB_FEEDBACK_TOKEN=${GITHUB_FEEDBACK_TOKEN:-}
+      NODE_ENV: production
+      NEST_PORT: '3000'
+      DATABASE_URL: postgres://user:password@db:5432/pomodoro
+      REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379
+      JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET}
+      CORS_ORIGINS: ${CORS_ORIGINS:-tauri://localhost,http://tauri.localhost,https://tauri.localhost}
+      FIREBASE_SERVICE_ACCOUNT_JSON: ${FIREBASE_SERVICE_ACCOUNT_JSON:-}
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-}
+      OPENROUTER_HTTP_REFERER: ${OPENROUTER_HTTP_REFERER:-https://pomi.app}
+      GITHUB_FEEDBACK_TOKEN: ${GITHUB_FEEDBACK_TOKEN:-}
+      GITHUB_FEEDBACK_REPOSITORY: ${GITHUB_FEEDBACK_REPOSITORY:-}
+      GITHUB_FEEDBACK_LABEL: ${GITHUB_FEEDBACK_LABEL:-feedback}
     restart: always
 
   db:
@@ -24,10 +31,35 @@ services:
       POSTGRES_DB: pomodoro
     volumes:
       - /var/lib/docker-volumes/pomi-db:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"
+      interval: 5s
+      timeout: 5s
+      retries: 12
     restart: always
 
   redis:
-    image: redis:alpine
+    image: redis:7-alpine
+    command:
+      - redis-server
+      - --appendonly
+      - 'yes'
+      - --requirepass
+      - ${REDIS_PASSWORD:?Set REDIS_PASSWORD}
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?Set REDIS_PASSWORD}
+    volumes:
+      - redisdata:/data
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - redis-cli -a "$${REDIS_PASSWORD}" ping | grep PONG
+      interval: 5s
+      timeout: 5s
+      retries: 12
     restart: always
-    ports:
-      - '6379:6379'
+
+volumes:
+  redisdata:
