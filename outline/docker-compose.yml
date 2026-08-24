@@ -1,0 +1,60 @@
+name: outline
+
+services:
+  outline:
+    container_name: outline-app
+    image: docker.getoutline.com/outlinewiki/outline:latest
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      URL: ${OUTLINE_URL:?Set OUTLINE_URL}
+      PORT: 3000
+      SECRET_KEY: ${OUTLINE_SECRET_KEY:?Set OUTLINE_SECRET_KEY}
+      UTILS_SECRET: ${OUTLINE_UTILS_SECRET:?Set OUTLINE_UTILS_SECRET}
+      DATABASE_URL: "postgres://outline:${OUTLINE_POSTGRES_PASSWORD:?Set OUTLINE_POSTGRES_PASSWORD}@postgres:5432/outline"
+      PGSSLMODE: disable
+      REDIS_URL: redis://redis:6379
+      FILE_STORAGE: local
+      FILE_STORAGE_LOCAL_ROOT_DIR: /var/lib/outline/data
+      GOOGLE_CLIENT_ID: ${OUTLINE_GOOGLE_CLIENT_ID:-}
+      GOOGLE_CLIENT_SECRET: ${OUTLINE_GOOGLE_CLIENT_SECRET:-}
+      FORCE_HTTPS: ${OUTLINE_FORCE_HTTPS:-true}
+    ports:
+      - "3011:3000"
+    volumes:
+      - /var/lib/docker-volumes/outline/storage:/var/lib/outline/data
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  redis:
+    container_name: outline-redis
+    image: redis:7-alpine
+    restart: unless-stopped
+    expose:
+      - "6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  postgres:
+    container_name: outline-postgres
+    image: postgres:18
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: outline
+      POSTGRES_PASSWORD: ${OUTLINE_POSTGRES_PASSWORD:?Set OUTLINE_POSTGRES_PASSWORD}
+      POSTGRES_DB: outline
+    expose:
+      - "5432"
+    volumes:
+      - /var/lib/docker-volumes/outline/postgres:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d \"$${POSTGRES_DB}\" -U \"$${POSTGRES_USER}\""]
+      interval: 10s
+      timeout: 5s
+      retries: 5
