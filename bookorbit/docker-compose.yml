@@ -6,8 +6,6 @@ services:
     image: ${APP_IMAGE?required}
     restart: unless-stopped
     init: true
-    env_file:
-      - .env
     ports:
       - "${APP_PORT:-6060}:${PORT:-3000}"
     environment:
