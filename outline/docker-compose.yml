@@ -52,11 +52,11 @@ services:
       retries: 3
     restart: unless-stopped
   postgres:
-    image: postgres
+    image: postgres:18
     container_name: outline-postgres
     hostname: outline-postgres
     volumes:
-      - /var/lib/docker-volumes/outline/db:/var/lib/postgresql/data
+      - /var/lib/docker-volumes/outline/db:/var/lib/postgresql
     healthcheck:
       test:
         - CMD
