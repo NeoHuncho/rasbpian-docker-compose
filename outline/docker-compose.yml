@@ -5,7 +5,7 @@ services:
     container_name: outline-app
     hostname: outline-app
     ports:
-      - 3000:3000
+      - 3006:3000
     volumes:
       - /var/lib/docker-volumes/outline/storage:/var/lib/outline/data
     depends_on:
