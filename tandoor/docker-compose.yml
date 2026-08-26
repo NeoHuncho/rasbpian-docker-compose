@@ -2,6 +2,10 @@ services:
   db_recipes:
     restart: always
     image: postgres:16-alpine
+    mem_limit: 2g
+    memswap_limit: 3g
+    cpus: 2.0
+    pids_limit: 512
     volumes:
       - /var/lib/docker-volumes/tandoor/postgresql:/var/lib/postgresql/data
     environment:
@@ -12,6 +16,10 @@ services:
   web_recipes:
     restart: always
     image: vabene1111/recipes:latest
+    mem_limit: 2g
+    memswap_limit: 3g
+    cpus: 2.0
+    pids_limit: 512
     environment:
       - SECRET_KEY=${SECRET_KEY}
       - ALLOWED_HOSTS=*

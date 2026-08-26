@@ -5,6 +5,10 @@ services:
     image: ghcr.io/linuxserver/plex:latest
     container_name: plex
     network_mode: host
+    mem_limit: 4g
+    memswap_limit: 6g
+    cpus: 3.0
+    pids_limit: 1024
     environment:
       - PUID=1000
       - PGID=1000

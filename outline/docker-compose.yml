@@ -36,6 +36,10 @@ services:
     command:
       - redis-server
       - /redis.conf
+    mem_limit: 512m
+    memswap_limit: 1g
+    cpus: 1.0
+    pids_limit: 256
     healthcheck:
       test:
         - CMD
@@ -51,6 +55,10 @@ services:
     hostname: outline-postgres
     volumes:
       - /var/lib/docker-volumes/outline/db:/var/lib/postgresql
+    mem_limit: 2g
+    memswap_limit: 3g
+    cpus: 2.0
+    pids_limit: 512
     healthcheck:
       test:
         - CMD

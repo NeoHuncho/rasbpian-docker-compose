@@ -28,6 +28,10 @@ services:
   db:
     image: yobasystems/alpine-mariadb:11.4
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    mem_limit: 2g
+    memswap_limit: 3g
+    cpus: 2.0
+    pids_limit: 512
     environment:
       MYSQL_ROOT_PASSWORD: supersecret
       MYSQL_USER: vikunja

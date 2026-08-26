@@ -4,6 +4,10 @@ services:
     image: homeassistant/home-assistant:stable
     container_name: homeassistant
     network_mode: host
+    mem_limit: 2g
+    memswap_limit: 3g
+    cpus: 2.0
+    pids_limit: 512
     environment:
       - TZ=Europe/Paris
     ports:

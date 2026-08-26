@@ -61,6 +61,10 @@ services:
   redis:
     image: redis
     container_name: affine_redis
+    mem_limit: 512m
+    memswap_limit: 1g
+    cpus: 1.0
+    pids_limit: 256
     restart: unless-stopped
     healthcheck:
       test: ['CMD', 'redis-cli', '--raw', 'incr', 'ping']
@@ -74,6 +78,10 @@ services:
     restart: unless-stopped
     volumes:
       - /var/lib/docker-volumes/affine/postgres:/var/lib/postgresql/data
+    mem_limit: 2g
+    memswap_limit: 3g
+    cpus: 2.0
+    pids_limit: 512
     healthcheck:
       test: ['CMD', 'pg_isready', '-U', 'affine', '-d', 'affine']
       interval: 10s
@@ -86,4 +94,3 @@ services:
       POSTGRES_INITDB_ARGS: '--data-checksums'
       POSTGRES_HOST_AUTH_METHOD: trust
       PGDATA: /var/lib/postgresql/data/pgdata
-      

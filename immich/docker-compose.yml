@@ -30,6 +30,10 @@ services:
     depends_on:
       - redis
       - database
+    mem_limit: 4g
+    memswap_limit: 6g
+    cpus: 3.0
+    pids_limit: 1024
     restart: always
     healthcheck:
       disable: false
@@ -47,6 +51,10 @@ services:
       - ${MODEL_CACHE_LOCATION}:/cache
     environment:
       MODEL_CACHE_LOCATION: ${MODEL_CACHE_LOCATION}
+    mem_limit: 4g
+    memswap_limit: 6g
+    cpus: 3.0
+    pids_limit: 1024
     restart: always
     healthcheck:
       disable: false
@@ -54,6 +62,10 @@ services:
   redis:
     container_name: immich_redis
     image: docker.io/valkey/valkey:9@sha256:4963247afc4cd33c7d3b2d2816b9f7f8eeebab148d29056c2ca4d7cbc966f2d9
+    mem_limit: 512m
+    memswap_limit: 1g
+    cpus: 1.0
+    pids_limit: 256
     healthcheck:
       test: redis-cli ping || exit 1
     restart: always
@@ -72,6 +84,10 @@ services:
       # Do not edit the next line. If you want to change the database storage location on your system, edit DB_DATA_LOCATION in your .env or Portainer environment.
       - ${DB_DATA_LOCATION}:/var/lib/postgresql/data
     shm_size: 128mb
+    mem_limit: 2g
+    memswap_limit: 3g
+    cpus: 2.0
+    pids_limit: 512
     restart: always
     healthcheck:
       disable: false

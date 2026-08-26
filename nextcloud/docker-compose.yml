@@ -5,6 +5,10 @@ services:
     image: yobasystems/alpine-mariadb:11.4
     command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
     restart: always
+    mem_limit: 2g
+    memswap_limit: 3g
+    cpus: 2.0
+    pids_limit: 512
     volumes:
       - /var/lib/docker-volumes/nextcloud/db:/var/lib/mysql
     environment:
