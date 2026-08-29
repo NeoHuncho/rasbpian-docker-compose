@@ -1,7 +1,7 @@
 version: "3.2"
 services:
   outline:
-    image: docker.getoutline.com/outlinewiki/outline:latest
+    image: docker.getoutline.com/outlinewiki/outline:1.9
     container_name: outline-app
     hostname: outline-app
     ports:
@@ -26,11 +26,11 @@ services:
       # SMTP, OAuth, or OIDC credentials are configured for this service.
       # Enable Passkeys in Settings -> Authentication, then register the
       # first passkey from the authenticated admin account.
-    restart: unless-stopped
+    restart: always
   redis:
     container_name: outline-redis
     hostname: outline-redis
-    image: redis
+    image: redis:8
     volumes:
       - /var/lib/docker-volumes/outline/redis/redis.conf:/redis.conf
     command:
@@ -48,7 +48,7 @@ services:
       interval: 10s
       timeout: 30s
       retries: 3
-    restart: unless-stopped
+    restart: always
   postgres:
     image: postgres:18
     container_name: outline-postgres
@@ -68,4 +68,4 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
-    restart: unless-stopped
+    restart: always

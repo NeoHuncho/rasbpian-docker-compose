@@ -1,6 +1,6 @@
 services:
   audiobookshelf:
-    image: ghcr.io/advplyr/audiobookshelf:latest
+    image: ghcr.io/advplyr/audiobookshelf:2.36.0
     ports:
       - 13378:80
     volumes:
@@ -13,4 +13,4 @@ services:
       - PGID=1000 
       - REFRESH_TOKEN_EXPIRY=15552000 # 6 months
       - ACCESS_TOKEN_EXPIRY= 86400 # 1 day
-    restart: unless-stopped
+    restart: always

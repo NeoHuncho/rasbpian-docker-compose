@@ -1,7 +1,7 @@
 version: '3'
 services:
   filebrowser:
-    image: filebrowser/filebrowser:latest
+    image: filebrowser/filebrowser:v2
     container_name: filebrowser
     volumes:
       - /mainDrive:/srv/mainDrive
@@ -13,4 +13,4 @@ services:
       - PGID=1000
     ports:
       - 8095:80
-    restart: unless-stopped
+    restart: always

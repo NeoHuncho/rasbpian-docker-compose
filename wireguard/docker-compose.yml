@@ -1,7 +1,7 @@
 version: "2.1"
 services:
   wireguard:
-    image: linuxserver/wireguard
+    image: linuxserver/wireguard:1.0.20260223
     container_name: wireguard
     cap_add:
       - NET_ADMIN
@@ -21,4 +21,4 @@ services:
       - /lib/modules:/lib/modules
     ports:
       - 51820:51820/udp
-    restart: unless-stopped
+    restart: always

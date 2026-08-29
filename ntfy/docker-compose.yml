@@ -1,7 +1,7 @@
 version: "2.3"
 services:
   ntfy:
-    image: binwiederhier/ntfy
+    image: binwiederhier/ntfy:v2
     container_name: ntfy
     command:
       - serve
@@ -13,4 +13,4 @@ services:
       - /etc/ntfy:/etc/ntfy
     ports:
       - 3234:80
-    restart: unless-stopped
+    restart: always

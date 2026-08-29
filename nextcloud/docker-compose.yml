@@ -2,7 +2,7 @@ version: '2'
 
 services:
   db:
-    image: yobasystems/alpine-mariadb:11.4
+    image: yobasystems/alpine-mariadb:11
     command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
     restart: always
     mem_limit: 2g
@@ -18,7 +18,7 @@ services:
       - MYSQL_USER=nextcloud
 
   app:
-    image: nextcloud
+    image: nextcloud:34
     ports:
       - 8080:80
     links:

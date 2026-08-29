@@ -2,7 +2,7 @@
 version: "2.1"
 services:
   plex:
-    image: ghcr.io/linuxserver/plex:latest
+    image: ghcr.io/linuxserver/plex:1.43.3
     container_name: plex
     network_mode: host
     mem_limit: 4g

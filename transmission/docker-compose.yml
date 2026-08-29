@@ -23,9 +23,9 @@ services:
         max-size: 10m
     ports:
       - '9092:9091'
-    image: haugene/transmission-openvpn
+    image: haugene/transmission-openvpn:5
     mem_limit: 1g
     memswap_limit: 2g
     cpus: 2.0
     pids_limit: 512
-    restart: unless-stopped
+    restart: always

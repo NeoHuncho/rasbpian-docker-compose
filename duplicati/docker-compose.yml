@@ -3,7 +3,7 @@ version: "3.9"
 services:
   duplicati:
     container_name: duplicati
-    image: linuxserver/duplicati
+    image: linuxserver/duplicati:2
     environment:
       - PUID=0
       - PGID=0
@@ -19,4 +19,4 @@ services:
     ports:
       - 8200:8200
     network_mode: host
-    restart: unless-stopped
+    restart: always

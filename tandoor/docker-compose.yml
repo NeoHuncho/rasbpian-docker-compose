@@ -15,7 +15,7 @@ services:
 
   web_recipes:
     restart: always
-    image: vabene1111/recipes:latest
+    image: vabene1111/recipes:2
     mem_limit: 2g
     memswap_limit: 3g
     cpus: 2.0

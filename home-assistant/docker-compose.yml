@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   homeassistant:
-    image: homeassistant/home-assistant:stable
+    image: homeassistant/home-assistant:2026.8
     container_name: homeassistant
     network_mode: host
     mem_limit: 2g
@@ -16,7 +16,7 @@ services:
       - /var/lib/docker-volumes/home-assistant:/config
     restart: always
   wyoming-piper:
-    image: rhasspy/wyoming-piper
+    image: rhasspy/wyoming-piper:2.4.2
     container_name: wyoming-piper
     ports:
       - "10200:10200"

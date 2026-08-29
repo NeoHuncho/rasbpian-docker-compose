@@ -3,8 +3,8 @@ name: bookorbit
 services:
   app:
     container_name: bookorbit-app
-    image: ${APP_IMAGE?required}
-    restart: unless-stopped
+    image: ghcr.io/bookorbit/bookorbit:latest
+    restart: always
     init: true
     ports:
       - "${APP_PORT:-6060}:${PORT:-3000}"
@@ -63,7 +63,7 @@ services:
   postgres:
     container_name: bookorbit-db
     image: pgvector/pgvector:pg18
-    restart: unless-stopped
+    restart: always
     environment:
       POSTGRES_USER: ${POSTGRES_USER?required}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD?required}

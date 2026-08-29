@@ -3,9 +3,9 @@ version: '3'
 
 services:
   beszel-agent:
-    image: henrygd/beszel-agent
+    image: henrygd/beszel-agent:0
     container_name: beszel-agent
-    restart: unless-stopped
+    restart: always
     network_mode: host
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro

@@ -1,8 +1,8 @@
 services:
   beszel:
-    image: henrygd/beszel:latest
+    image: henrygd/beszel:0
     container_name: beszel
-    restart: unless-stopped
+    restart: always
     ports:
       - 8090:8090
     volumes:

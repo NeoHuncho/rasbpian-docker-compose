@@ -1,8 +1,8 @@
 services:
   termix:
-    image: ghcr.io/lukegus/termix:latest
+    image: ghcr.io/lukegus/termix:2.7.1
     container_name: termix
-    restart: unless-stopped
+    restart: always
     network_mode: host
     mem_limit: 2g
     memswap_limit: 3g

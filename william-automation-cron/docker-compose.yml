@@ -3,7 +3,7 @@ services:
   william-automation-cron:
     image: neohuncho/william-automation-cron
     container_name: william-automation-cron
-    restart: unless-stopped
+    restart: always
     environment:
       - NEXTCLOUD_PASSWORD=${NEXTCLOUD_PASSWORD}
       - NEXTCLOUD_HOST=${NEXTCLOUD_HOST}
@@ -15,4 +15,3 @@ services:
       - NODE_ENV=production
       - VIKUNJA_API_KEY=${VIKUNJA_API_KEY}
       - VIKUNJA_HOST=${VIKUNJA_HOST}
-  
