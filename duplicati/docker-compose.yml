@@ -3,11 +3,13 @@ version: "3.9"
 services:
   duplicati:
     container_name: duplicati
-    image: linuxserver/duplicati:2
+    image: linuxserver/duplicati:2.3.0
     environment:
       - PUID=0
       - PGID=0
       - TZ=Europe/Paris
+      # Set once in Portainer's stack environment and keep stable across redeploys.
+      - SETTINGS_ENCRYPTION_KEY=${SETTINGS_ENCRYPTION_KEY}
     volumes:
       - /var/lib/docker-volumes/duplicati:/config #Config Files
       - /backupDrive1:/backupDrive1 #Backup Drive
