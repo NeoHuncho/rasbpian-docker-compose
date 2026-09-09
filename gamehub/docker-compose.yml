@@ -4,7 +4,7 @@ services:
     restart: unless-stopped
     init: true
     ports:
-      - ${GAMEHUB_PORT:-8080}:8080'
+      - ${GAMEHUB_PORT:-8080}:3492'
     environment:
       PUBLIC_ORIGIN: ${PUBLIC_ORIGIN:?Set PUBLIC_ORIGIN to the public Gamehub URL}
       DATABASE_PATH: /data/gamehub.sqlite
