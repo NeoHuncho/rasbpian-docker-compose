@@ -27,8 +27,18 @@ tags; those tags are retained when a usable floating major tag is not published.
 Immich is pinned to its current `v3` major tag, BookOrbit directly uses
 `ghcr.io/bookorbit/bookorbit:latest`, and the custom `william-automation-cron`
 image currently exposes only the unqualified/latest tag; these exceptions are
-intentionally reported by the monthly image review. The archived stacks under
+subject to the maintenance policy below. The archived stacks under
 `archive/` and the Pomi stack are outside this image-tag policy.
+
+Monthly maintenance follows `skills/docker-small-updates/SKILL.md` and connects
+using `ssh william@192.168.68.54`. Verify official release notes and upgrade guides
+online, then apply compatible stable releases of any version size, including major
+updates, followed by Docker health, application and restart checks. Applicable
+breaking changes or manual migrations are reported with simple migration steps;
+unverified compatibility requires investigation before deployment.
+William Automation Cron, Overseerr, File Browser and the entire Grafana/Loki
+stack (including Promtail) are ignored, as marked in their Compose files.
+These exclusions do not change the independent Watchtower configuration.
 
 Docker Compose has no elapsed-time limit for a restart loop. `on-failure:N` can cap
 failed restart attempts, but it is not a five-to-ten-minute timer and would not

@@ -1,4 +1,5 @@
 ---
+# codex-maintenance: ignore
 version: '3'
 
 services:

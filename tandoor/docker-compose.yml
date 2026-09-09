@@ -1,13 +1,13 @@
 services:
   db_recipes:
     restart: always
-    image: postgres:16-alpine
+    image: postgres:18-alpine
     mem_limit: 2g
     memswap_limit: 3g
     cpus: 2.0
     pids_limit: 512
     volumes:
-      - /var/lib/docker-volumes/tandoor/postgresql:/var/lib/postgresql/data
+      - /var/lib/docker-volumes/tandoor/postgresql18:/var/lib/postgresql
     environment:
       - POSTGRES_DB=tandoor
       - POSTGRES_USER=tandoor

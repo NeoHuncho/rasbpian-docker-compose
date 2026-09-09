@@ -1,7 +1,7 @@
 version: "3.2"
 services:
   outline:
-    image: docker.getoutline.com/outlinewiki/outline:1.9
+    image: docker.getoutline.com/outlinewiki/outline:1.10.0
     container_name: outline-app
     hostname: outline-app
     ports:

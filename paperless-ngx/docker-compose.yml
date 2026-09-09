@@ -1,16 +1,16 @@
 version: "3.4"
 services:
   broker:
-    image: docker.io/library/redis:7
+    image: docker.io/library/redis:8
     restart: always
     volumes:
       - /var/lib/docker-volumes/paperless-ngx/redis:/data
 
   db:
-    image: postgres:15-alpine
+    image: postgres:18-alpine
     restart: always
     volumes:
-      - /var/lib/docker-volumes/paperless-ngx/db:/var/lib/postgresql/data
+      - /var/lib/docker-volumes/paperless-ngx/db-pg18:/var/lib/postgresql
     environment:
       POSTGRES_DB: paperless
       POSTGRES_USER: paperless

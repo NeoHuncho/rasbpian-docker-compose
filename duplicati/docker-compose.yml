@@ -3,7 +3,7 @@ version: "3.9"
 services:
   duplicati:
     container_name: duplicati
-    image: linuxserver/duplicati:2.3.0
+    image: linuxserver/duplicati:2.4.0
     environment:
       - PUID=0
       - PGID=0
