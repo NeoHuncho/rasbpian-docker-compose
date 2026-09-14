@@ -1,17 +1,14 @@
 # codex-maintenance: ignore
-version: '3'
 services:
   filebrowser:
-    image: filebrowser/filebrowser:v2
+    image: gtstef/filebrowser:stable
     container_name: filebrowser
     volumes:
       - /mainDrive:/srv/mainDrive
       - /plexDrive:/srv/plexDrive
-      - /var/lib/docker-volumes/file-browser/db:/database
-      - /var/lib/docker-volumes/file-browser/config:/config
+      - /var/lib/docker-volumes/file-browser/db:/home/filebrowser/data
     environment:
-      - PUID=1000
-      - PGID=1000
+      FILEBROWSER_ADMIN_PASSWORD: "${FILEBROWSER_ADMIN_PASSWORD:?Set FILEBROWSER_ADMIN_PASSWORD in the deployment environment}"
     ports:
-      - 8095:80
+      - "8095:80"
     restart: always

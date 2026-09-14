@@ -36,7 +36,7 @@ online, then apply compatible stable releases of any version size, including maj
 updates, followed by Docker health, application and restart checks. Applicable
 breaking changes or manual migrations are reported with simple migration steps;
 unverified compatibility requires investigation before deployment.
-William Automation Cron, Overseerr, File Browser and the entire Grafana/Loki
+William Automation Cron, Overseerr, File Browser Quantum and the entire Grafana/Loki
 stack (including Promtail) are ignored, as marked in their Compose files.
 These exclusions do not change the independent Watchtower configuration.
 
