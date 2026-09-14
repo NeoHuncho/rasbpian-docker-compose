@@ -1,4 +1,3 @@
-# codex-maintenance: ignore
 services:
   filebrowser:
     image: gtstef/filebrowser:stable
