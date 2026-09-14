@@ -1,6 +1,6 @@
 services:
   filebrowser:
-    image: gtstef/filebrowser:stable
+    image: gtstef/filebrowser:1.5-stable
     container_name: filebrowser
     volumes:
       - /mainDrive:/srv/mainDrive
